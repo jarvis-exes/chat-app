@@ -17,6 +17,7 @@
       gap: 20px;
       border-radius: 10px;
       padding: 10px;
+      transition: all 0.1s linear;
 
       input {
         background-color: transparent;
@@ -31,12 +32,21 @@
       }
     }
 
+    .searchBar:hover {
+      transform: scale(1.1);
+    }
+
     .add {
       width: 36px;
       background-color: rgba(34, 34, 34, 0.5);
       padding: 10px;
       border-radius: 10px;
       cursor: pointer;
+      transition: all 0.1s linear;
+    }
+
+    .add:hover {
+      transform: scale(1.25);
     }
   }
 
@@ -44,9 +54,11 @@
     display: flex;
     align-items: center;
     gap: 20px;
-    padding: 20px;
+    padding: 10px;
+    margin: 5px;
     cursor: pointer;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 35px;
+    transition: background-color 0.2s ease-out;
 
     img {
       width: 50px;
@@ -69,5 +81,15 @@
       font-size: 14px;
       font-weight: 300;
     }
+  }
+
+  hr {
+    margin: auto;
+    width: 90%;
+    border-color: rgba(255, 255, 255, 0.25);
+  }
+
+  .item:hover {
+    background-color: rgba(182, 182, 182, 0.386);
   }
 }
