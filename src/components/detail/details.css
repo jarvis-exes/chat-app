@@ -1,3 +1,14 @@
 .detail {
   flex: 1;
+  height: 100%;
+  background-color: rgba(40, 40, 40, 0.599);
+  backdrop-filter: blur(19px) saturate(180%);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  margin: 3px;
+  transition: all 0.1s linear;
+}
+
+.detail:hover {
+  box-shadow: 0px 0px 10px 1px black;
 }
