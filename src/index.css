@@ -4,10 +4,12 @@
   box-sizing: border-box;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  transition: all 0.1s linear;
 }
 
 body {
-  background-image: url("/bg.jpg");
+  background-image: url("/background/bg2.png");
+  background-size: cover;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -18,10 +20,6 @@ body {
 .container {
   width: 90vw;
   height: 90vh;
-  /* background-color: rgba(40, 40, 40, 0.599);
-  backdrop-filter: blur(19px) saturate(180%);
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.423); */
   display: flex;
 }
 

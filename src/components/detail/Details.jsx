@@ -58,16 +58,6 @@ const Details = () => {
               </div>
               <img src="./download.png" alt="" className="icon" />
             </div>
-            <div className="photoItem">
-              <div className="photoDetail">
-                <img
-                  src="https://images3.alphacoders.com/614/thumbbig-614743.webp"
-                  alt=""
-                />
-                <span>photo_abc.png</span>
-              </div>
-              <img src="./download.png" alt="" className="icon" />
-            </div>
           </div>
         </div>
         <div className="option">
@@ -77,6 +67,7 @@ const Details = () => {
           </div>
         </div>
         <button>Block User</button>
+        <button className="logout">Logout</button>
       </div>
     </div>
   );

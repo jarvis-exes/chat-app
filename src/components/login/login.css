@@ -1,0 +1,79 @@
+.login {
+  background-color: rgba(40, 40, 40, 0.599);
+  backdrop-filter: blur(19px) saturate(180%);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  width: 60vw;
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin: auto;
+
+  .item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 20px;
+
+      input {
+        padding: 20px;
+        border: none;
+        outline: none;
+        color: white;
+        border-radius: 30px;
+        background-color: rgba(26, 26, 26, 0.5);
+
+        &:hover {
+          background-color: rgba(26, 26, 26, 0.3);
+        }
+      }
+
+      label {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        cursor: pointer;
+
+        img {
+          width: 60px;
+          height: 60px;
+          margin-right: 20px;
+          border-radius: 50%;
+          object-fit: cover;
+        }
+      }
+
+      button {
+        width: 80%;
+        padding: 20px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-weight: 500;
+        color: black;
+        border: none;
+        background-color: rgba(250, 250, 250, 0.5);
+
+        &:hover {
+          background-color: rgba(250, 250, 250, 0.7);
+        }
+      }
+    }
+  }
+
+  .separator {
+    height: 80%;
+    width: 2px;
+    background-color: rgba(255, 255, 255, 0.436);
+  }
+}

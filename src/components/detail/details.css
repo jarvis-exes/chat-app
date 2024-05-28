@@ -9,7 +9,7 @@
   transition: all 0.1s linear;
 
   .user {
-    padding: 30px 20px;
+    padding: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -25,10 +25,10 @@
   }
 
   .info {
-    padding: 20px;
+    padding: 15px 25px;
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 13px;
 
     .option {
       .title {
@@ -50,6 +50,7 @@
         display: flex;
         flex-direction: column;
         gap: 20px;
+        margin-top: 20px;
 
         .photoItem {
           display: flex;
@@ -79,11 +80,33 @@
             width: 30px;
             height: 30px;
             background-color: rgba(31, 31, 31, 0.46);
-            padding: 10px;
-            border-radius: 50%;
+            padding: 8px;
+            border-radius: 30%;
             cursor: pointer;
           }
         }
+      }
+    }
+    button {
+      padding: 10px;
+      background-color: rgba(255, 126, 150, 0.529);
+      color: rgb(108, 0, 0);
+      border-radius: 5px;
+      border: 1px solid rgba(255, 255, 255, 0.399);
+      cursor: pointer;
+
+      &:hover {
+        background-color: rgba(255, 0, 0, 0.882);
+        color: white;
+      }
+
+      &:active {
+        transform: translateY(1px);
+      }
+
+      &.logout {
+        padding: 10px;
+        background-color: blue;
       }
     }
   }

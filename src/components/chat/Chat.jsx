@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./chat.css";
 import EmojiPicker from "emoji-picker-react";
 
@@ -11,6 +11,12 @@ const handleEmoji = (e) => {
 const Chat = () => {
   const [open, setOpen] = useState(false);
   const [text, setText] = useState("");
+
+  const endRef = useRef(null);
+
+  useEffect(() => {
+    endRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, []);
 
   const handleEmoji = (e) => {
     setText((prev) => prev + e.emoji);
@@ -62,6 +68,34 @@ const Chat = () => {
             <span>1 min ago</span>
           </div>
         </div>
+        <div className="message">
+          <img src="./avatar.png" alt="" />
+          <div className="texts">
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil ea
+              natus sequi ullam tenetur atque quae repellat repellendus itaque,
+              quisquam doloremque exercitationem, voluptas possimus aperiam eius
+              necessitatibus aspernatur quam vel.
+            </p>
+            <span>1 min ago</span>
+          </div>
+        </div>
+        <div className="message own">
+          <div className="texts">
+            <img
+              src="https://images3.alphacoders.com/135/thumbbig-135625.webp"
+              alt=""
+            />
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil ea
+              natus sequi ullam tenetur atque quae repellat repellendus itaque,
+              quisquam doloremque exercitationem, voluptas possimus aperiam eius
+              necessitatibus aspernatur quam vel.
+            </p>
+            <span>1 min ago</span>
+          </div>
+        </div>
+        <div ref={endRef}></div>
       </div>
       <div className="bottom">
         <div className="icons">
