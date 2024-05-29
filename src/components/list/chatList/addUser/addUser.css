@@ -2,7 +2,7 @@
   width: max-content;
   height: max-content;
   padding: 30px;
-  background-color: rgba(163, 163, 163, 0.199);
+  background-color: rgba(0, 0, 0, 0.648);
   border-radius: 10px;
   position: absolute;
   top: 0;
@@ -10,29 +10,36 @@
   left: 0;
   right: 0;
   margin: auto;
-  backdrop-filter: blur(18px) saturate(200%);
+  backdrop-filter: blur(20px) saturate(200%);
 
   form {
     display: flex;
     gap: 20px;
     border-radius: 25px;
-    background-color: #2e2e2ed0;
+    background-color: #93939356;
     padding: 10px;
+
+    &:hover {
+      background-color: #b7b7b772;
+    }
 
     input {
       padding: 10px;
-      /* border-radius: 10px; */
       border: none;
       outline: none;
       background-color: transparent;
       color: white;
+
+      &::placeholder {
+        color: rgba(255, 255, 255, 0.452);
+      }
     }
 
     button {
       padding: 15px;
       border-radius: 20px;
 
-      background-color: #cacaca40;
+      background-color: #00000061;
       color: white;
       border: none;
       cursor: pointer;
