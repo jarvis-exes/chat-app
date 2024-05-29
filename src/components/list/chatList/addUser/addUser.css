@@ -2,7 +2,7 @@
   width: max-content;
   height: max-content;
   padding: 30px;
-  background-color: rgba(17, 25, 40, 0.781);
+  background-color: rgba(163, 163, 163, 0.199);
   border-radius: 10px;
   position: absolute;
   top: 0;
@@ -10,25 +10,41 @@
   left: 0;
   right: 0;
   margin: auto;
+  backdrop-filter: blur(18px) saturate(200%);
 
   form {
     display: flex;
     gap: 20px;
+    border-radius: 25px;
+    background-color: #2e2e2ed0;
+    padding: 10px;
 
     input {
-      padding: 20px;
-      border-radius: 10px;
+      padding: 10px;
+      /* border-radius: 10px; */
       border: none;
       outline: none;
+      background-color: transparent;
+      color: white;
     }
 
     button {
-      padding: 20px;
-      border-radius: 10px;
-      background-color: #1a73e8;
+      padding: 15px;
+      border-radius: 20px;
+
+      background-color: #cacaca40;
       color: white;
       border: none;
       cursor: pointer;
+
+      &:hover {
+        background-color: #cacaca92;
+        color: black;
+      }
+
+      &:active {
+        transform: translateY(1px);
+      }
     }
   }
 
@@ -42,6 +58,7 @@
       display: flex;
       align-items: center;
       gap: 20px;
+      font-weight: 500;
 
       img {
         width: 50px;
@@ -54,10 +71,14 @@
     button {
       padding: 10px;
       border-radius: 10px;
-      background-color: #1a73e8;
+      background-color: #01a60fd0;
       color: white;
       border: none;
       cursor: pointer;
+
+      &:hover {
+        background-color: #007c0ab8;
+      }
     }
   }
 }

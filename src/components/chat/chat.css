@@ -1,17 +1,11 @@
 .chat {
   flex: 2;
-  border-left: 1px solid rgba(255, 255, 255, 0.25);
-  border-right: 1px solid rgba(255, 255, 255, 0.25);
+  flex: 2;
+  border-left: 10px solid #dddddd35;
+  border-right: 10px solid #dddddd35;
   height: 100%;
   display: flex;
   flex-direction: column;
-  background-color: rgba(40, 40, 40, 0.599);
-  backdrop-filter: blur(19px) saturate(180%);
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  margin: 3px;
-  transition: all 0.1s linear;
-  z-index: 1;
 
   .top {
     padding: 15px 25px;
@@ -181,8 +175,4 @@
       transform: translateY(1px);
     }
   }
-}
-
-.chat:hover {
-  box-shadow: 0px 0px 10px 1px black;
 }
