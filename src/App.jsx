@@ -9,18 +9,18 @@ const App = () => {
   const user = true;
 
   return (
-    <div className="container">
+    <>
       {user ? (
-        <>
+        <div className="container">
           <List />
           <Chat />
           <Details />
-        </>
+        </div>
       ) : (
         <Login />
       )}
       <Notification />
-    </div>
+    </>
   );
 };
 
