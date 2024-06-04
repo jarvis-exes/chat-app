@@ -7,6 +7,25 @@
   transition: all 0.1s linear;
 }
 
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+  width: 18px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0);
+  border-radius: 5px;
+}
+
+*:hover::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
 body {
   background-image: url("/background/bg2.png");
   background-size: cover;
@@ -27,21 +46,9 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-*::-webkit-scrollbar {
-  width: 6px;
-  height: 8px;
-}
-
-*::-webkit-scrollbar-track {
-  background: transparent;
-  width: 18px;
-}
-
-*::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, 0);
-  border-radius: 5px;
-}
-
-*:hover::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, 0.5);
+.loading {
+  padding: 50px;
+  font-size: 36px;
+  border-radius: 10px;
+  background-color: rgba(1, 1, 1, 0.392);
 }
