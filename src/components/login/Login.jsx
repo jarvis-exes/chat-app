@@ -31,6 +31,25 @@ const Login = () => {
 
     const { username, email, password } = Object.fromEntries(formData);
 
+    // VALIDATE INPUTS
+    if (!username || !email || !password) {
+      setLoading(false);
+      return toast.warn("Please enter inputs!");
+    }
+
+    if (!avatar.file) {
+      setLoading(false);
+      return toast.warn("Please upload an avatar!");
+    }
+
+    // VALIDATE UNIQUE USERNAME
+    // const usersRef = collection(db, "users");
+    // const q = query(usersRef, where("username", "==", username));
+    // const querySnapshot = await getDocs(q);
+    // if (!querySnapshot.empty) {
+    //   return toast.warn("Select another username");
+    // }
+
     try {
       const res = await createUserWithEmailAndPassword(auth, email, password);
 
@@ -48,10 +67,11 @@ const Login = () => {
         chats: [],
       });
 
-      toast.success("Account Created! You can login Sign In now.");
+      toast.success("Account Created! You can Sign In now.");
     } catch (error) {
       console.log(error);
       toast.error(error.message);
+      setLoading(false);
     } finally {
       setLoading(false);
     }
@@ -62,7 +82,6 @@ const Login = () => {
     setLoading(true);
 
     const formData = new FormData(e.target);
-
     const { email, password } = Object.fromEntries(formData);
 
     try {

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./chatList.css";
 import AddUser from "./addUser/AddUser";
 import { useUserStore } from "../../../lib/userStore";
-import { doc, onSnapshot } from "firebase/firestore";
+import { doc, getDoc, onSnapshot } from "firebase/firestore";
 import { db } from "../../../lib/firebase";
 
 const ChatList = () => {
@@ -50,17 +50,28 @@ const ChatList = () => {
           onClick={() => setAddMode((prev) => !prev)}
         />
       </div>
-      {chats.map((chat) => {
-        <div className="item" key={chat.chatId}>
-          <img src="./avatar.png" alt="" />
-          <div className="texts">
-            <span>Shubham Sharma</span>
-            <p>{chats.lastMessage}</p>
+      {chats.map((chat) => (
+        <>
+          <div className="item" key={chat.chatId}>
+            {console.log(chat.user.username)}
+            <img src={chat.user.avatar || "./avatar.png"} alt="" />
+            <div className="texts">
+              <span>{chat.user.username}</span>
+              <p>{chat.lastMessage}</p>
+            </div>
           </div>
-        </div>;
-      })}
+          <hr></hr>
+        </>
+      ))}
 
-      <hr></hr>
+      {/* <div className="item">
+        <img src="./avatar.png" alt="" />
+        <div className="texts">
+          <span>Hello</span>
+          <p>Hello</p>
+        </div>
+      </div>
+      <hr></hr> */}
 
       {addMode && <AddUser />}
     </div>
