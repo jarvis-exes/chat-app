@@ -53,7 +53,6 @@ const ChatList = () => {
       {chats.map((chat) => (
         <>
           <div className="item" key={chat.chatId}>
-            {console.log(chat.user.username)}
             <img src={chat.user.avatar || "./avatar.png"} alt="" />
             <div className="texts">
               <span>{chat.user.username}</span>
@@ -63,17 +62,7 @@ const ChatList = () => {
           <hr></hr>
         </>
       ))}
-
-      {/* <div className="item">
-        <img src="./avatar.png" alt="" />
-        <div className="texts">
-          <span>Hello</span>
-          <p>Hello</p>
-        </div>
-      </div>
-      <hr></hr> */}
-
-      {addMode && <AddUser />}
+      f{addMode && <AddUser />}
     </div>
   );
 };
