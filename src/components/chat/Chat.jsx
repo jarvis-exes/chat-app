@@ -1,16 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./chat.css";
 import EmojiPicker from "emoji-picker-react";
-
-const handleEmoji = (e) => {
-  setText((prev) => prev + e.emoji);
-  setOpen(false);
-  console.log(text);
-};
+import { db } from "../../lib/firebase";
+import { doc, onSnapshot } from "firebase/firestore";
+import { useChatStore } from "../../lib/chatStore";
 
 const Chat = () => {
   const [open, setOpen] = useState(false);
   const [text, setText] = useState("");
+  const [chat, setChat] = useState("");
+
+  const { chatId } = useChatStore();
 
   const endRef = useRef(null);
 
@@ -18,10 +18,21 @@ const Chat = () => {
     endRef.current?.scrollIntoView({ behavior: "smooth" });
   }, []);
 
+  useEffect(() => {
+    const unSub = onSnapshot(doc(db, "chats", chatId), (res) => {
+      setChat(res.data());
+    });
+
+    return () => {
+      unSub();
+    };
+  }, [chatId]);
+
+  console.log(chat);
+
   const handleEmoji = (e) => {
     setText((prev) => prev + e.emoji);
     setOpen(false);
-    console.log(text);
   };
 
   return (
@@ -41,60 +52,15 @@ const Chat = () => {
         </div>
       </div>
       <div className="center">
-        <div className="message">
-          <img src="./avatar.png" alt="" />
-          <div className="texts">
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil ea
-              natus sequi ullam tenetur atque quae repellat repellendus itaque,
-              quisquam doloremque exercitationem, voluptas possimus aperiam eius
-              necessitatibus aspernatur quam vel.
-            </p>
-            <span>1 min ago</span>
+        {chat?.messages?.map((message) => (
+          <div className="message own" key={message?.createdAt}>
+            <div className="texts">
+              {message.img && <img src={message.img} alt="" />}
+              <p>{message.text}</p>
+              {/* <span>1 min ago</span> */}
+            </div>
           </div>
-        </div>
-        <div className="message own">
-          <div className="texts">
-            <img
-              src="https://images3.alphacoders.com/135/thumbbig-135625.webp"
-              alt=""
-            />
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil ea
-              natus sequi ullam tenetur atque quae repellat repellendus itaque,
-              quisquam doloremque exercitationem, voluptas possimus aperiam eius
-              necessitatibus aspernatur quam vel.
-            </p>
-            <span>1 min ago</span>
-          </div>
-        </div>
-        <div className="message">
-          <img src="./avatar.png" alt="" />
-          <div className="texts">
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil ea
-              natus sequi ullam tenetur atque quae repellat repellendus itaque,
-              quisquam doloremque exercitationem, voluptas possimus aperiam eius
-              necessitatibus aspernatur quam vel.
-            </p>
-            <span>1 min ago</span>
-          </div>
-        </div>
-        <div className="message own">
-          <div className="texts">
-            <img
-              src="https://images3.alphacoders.com/135/thumbbig-135625.webp"
-              alt=""
-            />
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil ea
-              natus sequi ullam tenetur atque quae repellat repellendus itaque,
-              quisquam doloremque exercitationem, voluptas possimus aperiam eius
-              necessitatibus aspernatur quam vel.
-            </p>
-            <span>1 min ago</span>
-          </div>
-        </div>
+        ))}
         <div ref={endRef}></div>
       </div>
       <div className="bottom">
