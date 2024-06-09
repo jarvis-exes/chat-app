@@ -83,7 +83,7 @@ const ChatList = () => {
             key={chat.chatId}
             onClick={() => handleSelect(chat)}
             style={{
-              backgroundColor: chat?.isSeen ? "transparent" : "#5183fe",
+              backgroundColor: chat?.isSeen ? "transparent" : "#fc0362bb",
             }}
           >
             <img src={chat.user.avatar || "./avatar.png"} alt="" />
