@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Children, useState } from "react";
 import { toast } from "react-toastify";
 import "./login.css";
 import { auth, db } from "../../lib/firebase";
@@ -45,12 +45,12 @@ const Login = () => {
     }
 
     // VALIDATE UNIQUE USERNAME
-    const usersRef = collection(db, "users");
-    const q = query(usersRef, where("username", "==", username));
-    const querySnapshot = await getDocs(q);
-    if (!querySnapshot.empty) {
-      return toast.warn("Select another username");
-    }
+    // const usersRef = collection(db, "users");
+    // const q = query(usersRef, where("username", "==", username));
+    // const querySnapshot = await getDocs(q);
+    // if (!querySnapshot.empty) {
+    //   return toast.warn("Select another username");
+    // }
 
     try {
       const res = await createUserWithEmailAndPassword(auth, email, password);
