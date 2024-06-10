@@ -23,7 +23,8 @@ const Chat = () => {
   });
 
   const { currentUser } = useUserStore();
-  const { chatId, user } = useChatStore();
+  const { chatId, user, isCurentUserBlocked, isReceiverBlocked } =
+    useChatStore();
 
   const endRef = useRef(null);
 
@@ -165,9 +166,14 @@ const Chat = () => {
         </div>
         <input
           type="text"
-          placeholder="Type your message..."
+          placeholder={
+            isCurentUserBlocked || isReceiverBlocked
+              ? "You can't send a message"
+              : "Type your message..."
+          }
           value={text}
           onChange={(e) => setText(e.target.value)}
+          disabled={isCurentUserBlocked || isReceiverBlocked}
         />
         <div className="emoji">
           <img
@@ -179,7 +185,11 @@ const Chat = () => {
             <EmojiPicker open={open} onEmojiClick={handleEmoji} />
           </div>
         </div>
-        <button className="sendButton" onClick={handleSend}>
+        <button
+          className="sendButton"
+          onClick={handleSend}
+          disabled={isCurentUserBlocked || isReceiverBlocked}
+        >
           Send
         </button>
       </div>

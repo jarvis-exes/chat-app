@@ -143,6 +143,10 @@
       padding: 10px;
       border-radius: 10px;
       font-size: 16px;
+
+      &:disabled {
+        cursor: not-allowed;
+      }
     }
 
     .emoji {
@@ -163,16 +167,22 @@
       border-radius: 5px;
       cursor: pointer;
       transition: all 0.2s ease-in-out;
-    }
 
-    .sendButton:hover {
-      background-color: rgba(0, 153, 0, 0.9);
-      box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.2);
-    }
+      &:hover {
+        background-color: rgba(0, 153, 0, 0.9);
+        box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.2);
+      }
 
-    .sendButton:active {
-      background-color: rgba(0, 120, 0, 0.9);
-      transform: translateY(1px);
+      &:active {
+        background-color: rgba(0, 120, 0, 0.9);
+        transform: translateY(1px);
+      }
+
+      &:disabled {
+        background-color: rgba(247, 247, 247, 0.358);
+        cursor: not-allowed;
+        border: none;
+      }
     }
   }
 }
