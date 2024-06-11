@@ -12,7 +12,7 @@ const UserInfo = () => {
         <h2>{currentUser.username}</h2>
       </div>
       <div className="icons">
-        <img src="./edit.png" alt="" />
+        <img src="./more.png" alt="" />
       </div>
     </div>
   );
