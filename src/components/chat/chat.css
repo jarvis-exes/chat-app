@@ -32,7 +32,7 @@
         gap: 5px;
 
         span {
-          font-size: 18px;
+          font-size: 25px;
           font-weight: bold;
         }
 
@@ -66,8 +66,7 @@
     gap: 20px;
 
     .message {
-      max-width: 70%;
-      width: max-content;
+      max-width: 50%;
       display: flex;
       gap: 20px;
 
@@ -103,8 +102,10 @@
 
         p {
           padding: 10px 15px;
-          border-radius: 30px;
+          border-radius: 20px;
           background-color: #00000057;
+          overflow-wrap: anywhere;
+          max-width: fit-content;
         }
 
         span {

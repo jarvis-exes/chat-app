@@ -78,8 +78,12 @@
     }
 
     p {
-      font-size: 14px;
-      font-weight: 300;
+      font-size: 12px;
+      font-weight: 200;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 200px;
     }
   }
 
