@@ -31,7 +31,7 @@ const Chat = () => {
 
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, []);
+  }, [chat.messages]);
 
   useEffect(() => {
     const unSub = onSnapshot(doc(db, "chats", chatId), (res) => {
@@ -101,14 +101,14 @@ const Chat = () => {
       });
     } catch (error) {
       console.log(error);
+    } finally {
+      setImg({
+        file: null,
+        url: "",
+      });
+
+      setText("");
     }
-
-    setImg({
-      file: null,
-      url: "",
-    });
-
-    setText("");
   };
 
   return (
