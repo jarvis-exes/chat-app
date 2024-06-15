@@ -18,6 +18,7 @@ const Chat = () => {
   const [open, setOpen] = useState(false);
   const [text, setText] = useState("");
   const [chat, setChat] = useState("");
+  const [uploadImg, setUploadImg] = useState(false);
   const [img, setImg] = useState({
     file: null,
     url: "",
@@ -54,25 +55,45 @@ const Chat = () => {
         file: e.target.files[0],
         url: URL.createObjectURL(e.target.files[0]),
       });
+
+      setUploadImg(true);
     }
   };
 
-  const handleSend = async () => {
-    if (text === "") return;
-
+  const sendImg = async () => {
     let imgUrl = null;
 
     try {
       if (img.file) {
         imgUrl = await upload(img.file);
       }
+      await updateDoc(doc(db, "chats", chatId), {
+        messages: arrayUnion({
+          senderId: currentUser.id,
+          createdAt: new Date(),
+          ...(imgUrl && { img: imgUrl }),
+        }),
+      });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setUploadImg(false);
+      setImg({
+        file: null,
+        url: "",
+      });
+    }
+  };
 
+  const handleSend = async () => {
+    if (text === "") return;
+
+    try {
       await updateDoc(doc(db, "chats", chatId), {
         messages: arrayUnion({
           senderId: currentUser.id,
           text,
           createdAt: new Date(),
-          ...(imgUrl && { img: imgUrl }),
         }),
       });
 
@@ -137,13 +158,16 @@ const Chat = () => {
           >
             <div className="texts">
               {message.img && <img src={message.img} alt="" />}
-              <p>{message.text}</p>
-              <span>{format(message.createdAt.toDate())}</span>
+              {message.text && <p>{message.text}</p>}
+              {message.text || message.img ? (
+                <span>{format(message.createdAt.toDate())}</span>
+              ) : null}
             </div>
           </div>
         ))}
         {img.url && (
           <div className="message own">
+            {uploadImg ? <div onClick={sendImg}>Upload</div> : null}
             <div className="texts">
               <img src={img.url} alt="" />
             </div>
