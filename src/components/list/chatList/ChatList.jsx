@@ -85,6 +85,7 @@ const ChatList = () => {
           className="add"
           onClick={() => setAddMode((prev) => !prev)}
         />
+        {addMode && <AddUser />}
       </div>
       {filteredChats.map((chat) => (
         <>
@@ -92,9 +93,6 @@ const ChatList = () => {
             className={chat?.isSeen ? "item" : "item not-seen"}
             key={chat.chatId}
             onClick={() => handleSelect(chat)}
-            // style={{
-            //   backgroundColor: chat?.isSeen ? "transparent" : "#fc0362bb",
-            // }}
           >
             <img
               src={
@@ -116,8 +114,6 @@ const ChatList = () => {
           <hr></hr>
         </>
       ))}
-
-      {addMode && <AddUser />}
     </div>
   );
 };

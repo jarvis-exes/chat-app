@@ -32,7 +32,7 @@ const Chat = () => {
 
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [chat.messages]);
+  }, [chat.messages || chat.img]);
 
   useEffect(() => {
     const unSub = onSnapshot(doc(db, "chats", chatId), (res) => {
@@ -132,6 +132,12 @@ const Chat = () => {
     }
   };
 
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSend();
+    }
+  };
+
   return (
     <div className="chat">
       <div className="top">
@@ -167,7 +173,11 @@ const Chat = () => {
         ))}
         {img.url && (
           <div className="message own">
-            {uploadImg ? <div onClick={sendImg}>Upload</div> : null}
+            {uploadImg ? (
+              <div className="uploadButton" onClick={sendImg}>
+                Upload
+              </div>
+            ) : null}
             <div className="texts">
               <img src={img.url} alt="" />
             </div>
@@ -198,6 +208,7 @@ const Chat = () => {
           }
           value={text}
           onChange={(e) => setText(e.target.value)}
+          onKeyDown={handleKeyPress}
           disabled={isCurentUserBlocked || isReceiverBlocked}
         />
         <div className="emoji">

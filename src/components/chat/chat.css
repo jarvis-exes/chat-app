@@ -67,9 +67,22 @@
       max-width: 50%;
       display: flex;
       gap: 20px;
+      position: relative;
 
       &.own {
         align-self: flex-end;
+
+        .uploadButton {
+          background-color: rgba(0, 0, 0, 0.5);
+          padding: 10%;
+          cursor: pointer;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          border-radius: 10px;
+          backdrop-filter: blur(20px) saturate(200%);
+        }
 
         .texts {
           p {
