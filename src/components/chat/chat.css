@@ -76,6 +76,10 @@
         .texts {
           p {
             background-color: #cccccc58;
+            align-self: flex-end;
+          }
+          span {
+            align-self: flex-end;
           }
         }
       }
@@ -109,7 +113,8 @@
         }
 
         span {
-          font-size: 13px;
+          font-size: 11px;
+          color: rgba(255, 255, 255, 0.704);
         }
       }
     }

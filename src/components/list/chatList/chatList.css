@@ -85,15 +85,23 @@
       text-overflow: ellipsis;
       max-width: 200px;
     }
+
+    &:hover {
+      background-color: rgba(182, 182, 182, 0.386);
+    }
+
+    &.not-seen {
+      background-color: rgba(0, 100, 128, 0.566);
+
+      &:hover {
+        background-color: rgba(0, 132, 169, 0.792);
+      }
+    }
   }
 
   hr {
     margin: auto;
     width: 90%;
     border-color: rgba(255, 255, 255, 0.25);
-  }
-
-  .item:hover {
-    background-color: rgba(182, 182, 182, 0.386);
   }
 }

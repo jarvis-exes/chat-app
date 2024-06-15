@@ -89,12 +89,12 @@ const ChatList = () => {
       {filteredChats.map((chat) => (
         <>
           <div
-            className="item"
+            className={chat?.isSeen ? "item" : "item not-seen"}
             key={chat.chatId}
             onClick={() => handleSelect(chat)}
-            style={{
-              backgroundColor: chat?.isSeen ? "transparent" : "#fc0362bb",
-            }}
+            // style={{
+            //   backgroundColor: chat?.isSeen ? "transparent" : "#fc0362bb",
+            // }}
           >
             <img
               src={
