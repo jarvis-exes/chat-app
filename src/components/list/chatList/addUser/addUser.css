@@ -1,6 +1,6 @@
 .addUser {
-  /* min-width: max-content; */
-  /* min-height: max-content; */
+  min-width: max-content;
+  min-height: max-content;
   padding: 40px;
   background-color: rgba(0, 0, 0, 0.648);
   border-radius: 12px;
@@ -27,8 +27,12 @@
       padding: 10px;
       border: none;
       outline: none;
-      background-color: transparent;
+      background-color: transparent !important;
       color: white;
+
+      &:focus {
+        background-color: transparent;
+      }
 
       &::placeholder {
         color: rgba(255, 255, 255, 0.452);
