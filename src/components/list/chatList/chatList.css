@@ -37,16 +37,28 @@
     }
 
     .add {
-      width: 36px;
+      width: 40px;
+      height: 40px;
       background-color: rgba(34, 34, 34, 0.5);
-      padding: 10px;
+      padding: 9px;
       border-radius: 10px;
       cursor: pointer;
-      transition: all 0.1s linear;
+      transition: all 0.3s linear;
+
+      &:hover {
+        transform: scale(1.25);
+      }
     }
 
-    .add:hover {
-      transform: scale(1.25);
+    .close {
+      z-index: 2;
+      transition: all 0.3s linear;
+      transform: rotate(45deg);
+      width: 40px;
+      height: 40px;
+      padding: 4px;
+      background-color: rgba(34, 34, 34, 0.5);
+      border-radius: 50%;
     }
   }
 

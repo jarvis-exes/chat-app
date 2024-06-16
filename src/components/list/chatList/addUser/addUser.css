@@ -1,16 +1,16 @@
 .addUser {
-  width: max-content;
-  height: max-content;
-  padding: 30px;
+  /* min-width: max-content; */
+  /* min-height: max-content; */
+  padding: 40px;
   background-color: rgba(0, 0, 0, 0.648);
-  border-radius: 10px;
+  border-radius: 12px;
   position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  left: 278px;
+  top: 115px;
   margin: auto;
   backdrop-filter: blur(20px) saturate(200%);
+  z-index: 1;
+  animation: slide-in 1s ease-in-out 1;
 
   form {
     display: flex;
@@ -87,5 +87,16 @@
         background-color: #007c0ab8;
       }
     }
+  }
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateX(-190px) translateY(-70px) scale(0);
+    background-color: rgba(34, 34, 34, 0.5);
+  }
+  to {
+    transform: translateX(0px) translateY(0px) scale(1);
+    background-color: rgba(0, 0, 0, 0.648);
   }
 }
