@@ -18,20 +18,21 @@ const Chat = () => {
   const [open, setOpen] = useState(false);
   const [text, setText] = useState("");
   const [chat, setChat] = useState("");
+  const [uploadImg, setUploadImg] = useState(false);
   const [img, setImg] = useState({
     file: null,
     url: "",
   });
 
   const { currentUser } = useUserStore();
-  const { chatId, user, isCurentUserBlocked, isReceiverBlocked } =
+  const { chatId, user, isCurrentUserBlocked, isReceiverBlocked } =
     useChatStore();
 
   const endRef = useRef(null);
 
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [chat.messages]);
+  }, [chat.messages || chat.img]);
 
   useEffect(() => {
     const unSub = onSnapshot(doc(db, "chats", chatId), (res) => {
@@ -54,25 +55,45 @@ const Chat = () => {
         file: e.target.files[0],
         url: URL.createObjectURL(e.target.files[0]),
       });
+
+      setUploadImg(true);
     }
   };
 
-  const handleSend = async () => {
-    if (text === "") return;
-
+  const sendImg = async () => {
     let imgUrl = null;
 
     try {
       if (img.file) {
         imgUrl = await upload(img.file);
       }
+      await updateDoc(doc(db, "chats", chatId), {
+        messages: arrayUnion({
+          senderId: currentUser.id,
+          createdAt: new Date(),
+          ...(imgUrl && { img: imgUrl }),
+        }),
+      });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setUploadImg(false);
+      setImg({
+        file: null,
+        url: "",
+      });
+    }
+  };
 
+  const handleSend = async () => {
+    if (text === "") return;
+
+    try {
       await updateDoc(doc(db, "chats", chatId), {
         messages: arrayUnion({
           senderId: currentUser.id,
           text,
           createdAt: new Date(),
-          ...(imgUrl && { img: imgUrl }),
         }),
       });
 
@@ -111,6 +132,12 @@ const Chat = () => {
     }
   };
 
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSend();
+    }
+  };
+
   return (
     <div className="chat">
       <div className="top">
@@ -137,13 +164,20 @@ const Chat = () => {
           >
             <div className="texts">
               {message.img && <img src={message.img} alt="" />}
-              <p>{message.text}</p>
-              <span>{format(message.createdAt.toDate())}</span>
+              {message.text && <p>{message.text}</p>}
+              {message.text || message.img ? (
+                <span>{format(message.createdAt.toDate())}</span>
+              ) : null}
             </div>
           </div>
         ))}
         {img.url && (
           <div className="message own">
+            {uploadImg ? (
+              <div className="uploadButton" onClick={sendImg}>
+                Upload
+              </div>
+            ) : null}
             <div className="texts">
               <img src={img.url} alt="" />
             </div>
@@ -168,13 +202,14 @@ const Chat = () => {
         <input
           type="text"
           placeholder={
-            isCurentUserBlocked || isReceiverBlocked
+            isCurrentUserBlocked || isReceiverBlocked
               ? "You can't send a message"
               : "Type your message..."
           }
           value={text}
           onChange={(e) => setText(e.target.value)}
-          disabled={isCurentUserBlocked || isReceiverBlocked}
+          onKeyDown={handleKeyPress}
+          disabled={isCurrentUserBlocked || isReceiverBlocked}
         />
         <div className="emoji">
           <img
@@ -189,7 +224,7 @@ const Chat = () => {
         <button
           className="sendButton"
           onClick={handleSend}
-          disabled={isCurentUserBlocked || isReceiverBlocked}
+          disabled={isCurrentUserBlocked || isReceiverBlocked}
         >
           Send
         </button>

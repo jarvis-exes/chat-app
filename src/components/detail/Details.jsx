@@ -84,16 +84,6 @@ const Details = () => {
               </div>
               <img src="./download.png" alt="" className="icon" />
             </div>
-            <div className="photoItem">
-              <div className="photoDetail">
-                <img
-                  src="https://images3.alphacoders.com/614/thumbbig-614743.webp"
-                  alt=""
-                />
-                <span>photo_abc.png</span>
-              </div>
-              <img src="./download.png" alt="" className="icon" />
-            </div>
           </div>
         </div>
         <div className="option">
@@ -102,6 +92,8 @@ const Details = () => {
             <img src="./arrowUp.png" alt="" />
           </div>
         </div>
+      </div>
+      <div className="buttons">
         <button onClick={handleBlock}>
           {isCurrentUserBlocked
             ? "You are Blocked"

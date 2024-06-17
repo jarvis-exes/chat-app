@@ -80,21 +80,19 @@ const ChatList = () => {
           />
         </div>
         <img
-          src={addMode ? "./minus.png" : "./plus.png"}
+          src="./plus.png"
           alt=""
-          className="add"
+          className={addMode ? "close" : "add"}
           onClick={() => setAddMode((prev) => !prev)}
         />
+        {addMode && <AddUser />}
       </div>
       {filteredChats.map((chat) => (
         <>
           <div
-            className="item"
+            className={chat?.isSeen ? "item" : "item not-seen"}
             key={chat.chatId}
             onClick={() => handleSelect(chat)}
-            style={{
-              backgroundColor: chat?.isSeen ? "transparent" : "#fc0362bb",
-            }}
           >
             <img
               src={
@@ -116,8 +114,6 @@ const ChatList = () => {
           <hr></hr>
         </>
       ))}
-
-      {addMode && <AddUser />}
     </div>
   );
 };
