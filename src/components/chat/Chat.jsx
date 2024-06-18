@@ -188,13 +188,18 @@ const Chat = () => {
       <div className="bottom">
         <div className="icons">
           <label htmlFor="file">
-            <img src="./img.png" alt="" />
+            <img
+              src="./img.png"
+              alt=""
+              disabled={isCurrentUserBlocked || isReceiverBlocked}
+            />
           </label>
           <input
             type="file"
             id="file"
             style={{ display: "none" }}
             onChange={handleImg}
+            disabled={isCurrentUserBlocked || isReceiverBlocked}
           />
           <img src="./camera.png" alt="" />
           <img src="./mic.png" alt="" />

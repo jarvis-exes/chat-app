@@ -160,6 +160,7 @@
       padding: 10px;
       border-radius: 10px;
       font-size: 16px;
+      cursor: pointer;
 
       &:disabled {
         cursor: not-allowed;
