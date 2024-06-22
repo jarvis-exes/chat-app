@@ -1,22 +1,22 @@
 .chatList {
   flex: 1;
   overflow-y: auto;
-  margin: 5px;
+  margin: 3px;
 
   .search {
     display: flex;
     align-items: center;
-    gap: 20px;
-    padding: 20px;
+    gap: 10px;
+    padding: 10px;
 
     .searchBar {
       flex: 1;
       background-color: rgba(34, 34, 34, 0.5);
       display: flex;
       align-items: center;
-      gap: 20px;
+      gap: 15px;
       border-radius: 10px;
-      padding: 10px;
+      padding: 10px 5px;
       transition: all 0.1s linear;
 
       input {
@@ -33,7 +33,7 @@
     }
 
     .searchBar:hover {
-      transform: scale(1.1);
+      transform: scale(1.05);
     }
 
     .add {
@@ -43,21 +43,21 @@
       padding: 9px;
       border-radius: 10px;
       cursor: pointer;
-      transition: all 0.3s linear;
+      transition: all 0.2s linear;
 
       &:hover {
-        transform: scale(1.25);
+        transform: scale(1.15);
       }
     }
 
     .close {
       z-index: 2;
-      transition: all 0.3s linear;
+      transition: all 0.2s linear;
       transform: rotate(45deg);
       width: 40px;
       height: 40px;
       padding: 4px;
-      background-color: rgba(34, 34, 34, 0.5);
+      background-color: rgba(34, 34, 34, 0);
       border-radius: 50%;
     }
   }
@@ -73,8 +73,8 @@
     transition: background-color 0.2s ease-out;
 
     img {
-      width: 50px;
-      height: 50px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
       object-fit: cover;
     }
@@ -87,10 +87,11 @@
 
     span {
       font-weight: 500;
+      font-size: 15px;
     }
 
     p {
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 200;
       white-space: nowrap;
       overflow: hidden;
