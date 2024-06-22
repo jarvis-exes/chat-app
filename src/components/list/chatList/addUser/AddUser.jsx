@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./addUser.css";
 import { db } from "../../../../lib/firebase";
 import { useUserStore } from "../../../../lib/userStore";
@@ -17,7 +17,34 @@ import {
 
 const AddUser = () => {
   const [user, setUser] = useState(null);
+  const [added, setAdded] = useState(false);
   const { currentUser } = useUserStore();
+
+  useEffect(() => {
+    async function checkUserAdded() {
+      // Handle Already Added User
+      if (!user) {
+        return;
+      }
+
+      if (user.id === currentUser.id) {
+        setAdded(true);
+        return;
+      }
+
+      const userChatRef = doc(db, "userchats", currentUser.id);
+      const userChatsSnapshot = await getDoc(userChatRef);
+      const userChatsData = await userChatsSnapshot.data();
+
+      userChatsData.chats.map((chat) => {
+        if (chat.receiverId === user.id) {
+          setAdded(true);
+        }
+      });
+    }
+
+    checkUserAdded();
+  }, [user]);
 
   const handleSearch = async (e) => {
     e.preventDefault();
@@ -26,13 +53,13 @@ const AddUser = () => {
 
     try {
       const userRef = collection(db, "users");
-
       const q = query(userRef, where("username", "==", username));
 
       const querySnapShot = await getDocs(q);
 
       if (!querySnapShot.empty) {
         setUser(querySnapShot.docs[0].data());
+        setAdded(false);
       }
     } catch (error) {
       console.log(error);
@@ -86,7 +113,9 @@ const AddUser = () => {
             <img src={user.avatar || "./avatar.png"} alt="" />
             <span>{user.username}</span>
           </div>
-          <button onClick={handleAdd}>Add User</button>
+          <button onClick={handleAdd} disabled={added}>
+            {added ? "Added" : "Add User"}
+          </button>
         </div>
       )}
     </div>
