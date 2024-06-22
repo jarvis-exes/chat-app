@@ -43,7 +43,7 @@
       padding: 9px;
       border-radius: 10px;
       cursor: pointer;
-      transition: all 0.3s linear;
+      transition: all 0.2s linear;
 
       &:hover {
         transform: scale(1.25);
@@ -52,7 +52,7 @@
 
     .close {
       z-index: 2;
-      transition: all 0.3s linear;
+      transition: all 0.2s linear;
       transform: rotate(45deg);
       width: 40px;
       height: 40px;

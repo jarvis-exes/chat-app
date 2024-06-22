@@ -23,24 +23,22 @@ const AddUser = () => {
   useEffect(() => {
     async function checkUserAdded() {
       // Handle Already Added User
-      if (!user) {
-        return;
-      }
-
-      if (user.id === currentUser.id) {
-        setAdded(true);
-        return;
-      }
-
-      const userChatRef = doc(db, "userchats", currentUser.id);
-      const userChatsSnapshot = await getDoc(userChatRef);
-      const userChatsData = await userChatsSnapshot.data();
-
-      userChatsData.chats.map((chat) => {
-        if (chat.receiverId === user.id) {
+      if (user) {
+        if (user.id === currentUser.id) {
           setAdded(true);
+          return;
         }
-      });
+
+        const userChatRef = doc(db, "userchats", currentUser.id);
+        const userChatsSnapshot = await getDoc(userChatRef);
+        const userChatsData = await userChatsSnapshot.data();
+
+        userChatsData.chats.map((chat) => {
+          if (chat.receiverId === user.id) {
+            setAdded(true);
+          }
+        });
+      }
     }
 
     checkUserAdded();

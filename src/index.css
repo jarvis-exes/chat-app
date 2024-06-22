@@ -4,7 +4,6 @@
   box-sizing: border-box;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-  transition: all 0.1s linear;
 }
 
 *::-webkit-scrollbar {
@@ -44,11 +43,37 @@ body {
   backdrop-filter: blur(19px) saturate(180%);
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.3);
+  animation: opacityAnimation 0.5s ease-in;
 }
 
 .loading {
-  padding: 50px;
-  font-size: 36px;
-  border-radius: 10px;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  border: 10px solid transparent;
   background-color: rgba(1, 1, 1, 0.392);
+  backdrop-filter: blur(19px) saturate(180%);
+  border-top-color: #ffffff;
+  border-bottom-color: #ffffff;
+  animation: spin 1.2s cubic-bezier(0.5, 0.5, 0.5, 1) infinite;
+  margin: 100px auto;
+}
+
+@keyframes opacityAnimation {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
