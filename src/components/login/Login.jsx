@@ -6,7 +6,14 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import { doc, setDoc } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDocs,
+  query,
+  setDoc,
+  where,
+} from "firebase/firestore";
 import upload from "../../lib/upload";
 
 const Login = () => {
@@ -45,12 +52,14 @@ const Login = () => {
     }
 
     // VALIDATE UNIQUE USERNAME
-    // const usersRef = collection(db, "users");
-    // const q = query(usersRef, where("username", "==", username));
-    // const querySnapshot = await getDocs(q);
-    // if (!querySnapshot.empty) {
-    //   return toast.warn("Select another username");
-    // }
+    const usersRef = collection(db, "users");
+    const q = query(usersRef, where("username", "==", username));
+    const querySnapshot = await getDocs(q);
+
+    if (!querySnapshot.empty) {
+      setLoading(false);
+      return toast.warn("Select another username");
+    }
 
     try {
       const res = await createUserWithEmailAndPassword(auth, email, password);

@@ -201,8 +201,8 @@ const Chat = () => {
             onChange={handleImg}
             disabled={isCurrentUserBlocked || isReceiverBlocked}
           />
-          <img src="./camera.png" alt="" />
-          <img src="./mic.png" alt="" />
+          {/* <img src="./camera.png" alt="" />
+          <img src="./mic.png" alt="" /> */}
         </div>
         <input
           type="text"

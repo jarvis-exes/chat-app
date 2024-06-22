@@ -94,6 +94,8 @@ const AddUser = () => {
           updatedAt: Date.now(),
         }),
       });
+
+      setAdded(true);
     } catch (error) {
       console.log(error);
     }

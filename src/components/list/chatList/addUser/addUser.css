@@ -5,8 +5,8 @@
   background-color: rgba(0, 0, 0, 0.648);
   border-radius: 12px;
   position: absolute;
-  left: 278px;
-  top: 115px;
+  left: 240px;
+  top: 100px;
   margin: auto;
   backdrop-filter: blur(20px) saturate(200%);
   z-index: 1;
