@@ -23,9 +23,51 @@
     gap: 20px;
 
     img {
-      width: 20px;
-      height: 20px;
+      width: 35px;
+      height: 35px;
       cursor: pointer;
+      padding: 5px;
+      border-radius: 50%;
+      transition: all 0.1s linear;
+
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.49);
+      }
     }
+
+    .dropdown {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 40px;
+      padding: 8px;
+      z-index: 1;
+      border-radius: 10px;
+      background-color: rgba(34, 34, 34, 0.797);
+      backdrop-filter: blur(8px) saturate(180%);
+      animation: opacityAnimation 0.2s ease-in, slide 0.2s ease-in;
+
+      .option {
+        cursor: pointer;
+        padding: 10px 20px;
+        text-align: start;
+        transition: all 0.1s linear;
+
+        &:hover {
+          background-color: rgba(85, 85, 85, 0.5);
+          border-radius: 5px;
+        }
+      }
+    }
+  }
+}
+
+@keyframes slide {
+  from {
+    transform: translateX(-55px) translateY(-60px) scale(0);
+  }
+  to {
+    transform: translateX(0px) translateY(0px) scale(1);
   }
 }

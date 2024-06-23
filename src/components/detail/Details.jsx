@@ -3,7 +3,13 @@ import "./details.css";
 import { auth, db } from "../../lib/firebase";
 import { useChatStore } from "../../lib/chatStore";
 import { useUserStore } from "../../lib/userStore";
-import { arrayRemove, arrayUnion, updateDoc, doc } from "firebase/firestore";
+import {
+  arrayRemove,
+  arrayUnion,
+  updateDoc,
+  doc,
+  onSnapshot,
+} from "firebase/firestore";
 
 const Details = () => {
   const {
