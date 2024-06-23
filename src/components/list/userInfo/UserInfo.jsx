@@ -1,15 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./userInfo.css";
 import { useUserStore } from "../../../lib/userStore";
-import UserProfile from "./userProfile/UserProfile";
+import UserProfile from "../userProfile/UserProfile";
 
 const UserInfo = () => {
-  const { currentUser } = useUserStore();
+  const { currentUser, updatingProfile, changeProfileOpen } = useUserStore();
+
+  const handleOpenProfile = () => {
+    changeProfileOpen();
+  };
 
   return (
     <>
       <div className="userInfo">
-        <div className="user">
+        <div className="user" onClick={handleOpenProfile}>
           <img src={currentUser.avatar || "./avatar.png"} alt="" />
           <h2>{currentUser.username}</h2>
         </div>
@@ -17,7 +21,7 @@ const UserInfo = () => {
           <img src="./more.png" alt="" />
         </div>
       </div>
-      <UserProfile />
+      {updatingProfile && <UserProfile />}
     </>
   );
 };
