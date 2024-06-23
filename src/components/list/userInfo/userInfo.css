@@ -16,6 +16,14 @@
       border-radius: 50%;
       object-fit: cover;
     }
+
+    .userName {
+      p {
+        color: rgba(255, 255, 255, 0.503);
+        font-size: 14px;
+        margin-top: 5px;
+      }
+    }
   }
 
   .icons {

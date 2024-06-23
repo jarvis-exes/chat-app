@@ -48,8 +48,8 @@ const Details = () => {
     <div className="detail">
       <div className="user">
         <img src={user?.avatar || "./avatar.png"} alt="" />
-        <h2>{user?.username}</h2>
-        {/* <p>username should be here</p> */}
+        <h2>{user?.fullname}</h2>
+        <p>{user?.username}</p>
       </div>
       <div className="bottom-container">
         <div className="info">
@@ -99,7 +99,7 @@ const Details = () => {
             {isCurrentUserBlocked
               ? "You are Blocked"
               : isReceiverBlocked
-              ? "User Blocked"
+              ? "Unblock"
               : "Block"}
           </button>
           <button className="logout" onClick={handleLogout}>

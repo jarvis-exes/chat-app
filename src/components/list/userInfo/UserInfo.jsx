@@ -26,7 +26,10 @@ const UserInfo = () => {
       <div className="userInfo">
         <div className="user" onClick={handleOpenProfile}>
           <img src={currentUser.avatar || "./avatar.png"} alt="" />
-          <h2>{currentUser.username}</h2>
+          <div className="userName">
+            <h2>{currentUser.fullname}</h2>
+            <p>{currentUser.username}</p>
+          </div>
         </div>
         <div className="icons">
           <img

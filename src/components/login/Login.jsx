@@ -38,17 +38,13 @@ const Login = () => {
     setLoading(true);
     const formData = new FormData(e.target);
 
-    const { username, email, password } = Object.fromEntries(formData);
+    const { username, fullname, email, password } =
+      Object.fromEntries(formData);
 
     // VALIDATE INPUTS
-    if (!username || !email || !password) {
+    if (!username || !fullname || !email || !password) {
       setLoading(false);
       return toast.warn("Please enter inputs!");
-    }
-
-    if (!avatar.file) {
-      setLoading(false);
-      return toast.warn("Please upload an avatar!");
     }
 
     // VALIDATE UNIQUE USERNAME
@@ -64,12 +60,16 @@ const Login = () => {
     try {
       const res = await createUserWithEmailAndPassword(auth, email, password);
 
-      const imgUrl = await upload(avatar.file);
+      let imgUrl = null;
+      if (avatar.file) {
+        imgUrl = await upload(avatar.file);
+      }
 
       await setDoc(doc(db, "users", res.user.uid), {
         username,
+        fullname,
         email,
-        avatar: imgUrl,
+        ...(imgUrl && { avatar: imgUrl }),
         id: res.user.uid,
         blocked: [],
       });
@@ -78,7 +78,7 @@ const Login = () => {
         chats: [],
       });
 
-      toast.success("Account Created! You can Sign In now.");
+      toast.success("Account Created! ");
     } catch (error) {
       console.log(error);
       toast.error(error.message);
@@ -130,6 +130,7 @@ const Login = () => {
             onChange={handleAvatar}
           />
           <input type="text" placeholder="Username" name="username" />
+          <input type="text" placeholder="Full Name" name="fullname" />
           <input type="text" placeholder="Email" name="email" />
           <input type="password" placeholder="Password" name="password" />
           <button disabled={loading}>{loading ? "Loading" : "Sign Up"}</button>

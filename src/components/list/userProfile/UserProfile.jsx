@@ -30,7 +30,7 @@ const UserProfile = () => {
     setLoading(true);
 
     const formData = new FormData(e.target);
-    const { username } = Object.fromEntries(formData);
+    const { username, fullname } = Object.fromEntries(formData);
 
     try {
       if (avatar.file) {
@@ -39,6 +39,7 @@ const UserProfile = () => {
       }
       await updateDoc(doc(db, "users", currentUser.id), {
         ...(username && { username: username }),
+        ...(fullname && { fullname: fullname }),
         ...(imgUrl && { avatar: imgUrl }),
       });
     } catch (error) {
@@ -88,6 +89,7 @@ const UserProfile = () => {
           onChange={handleAvatar}
         />
         <input type="text" placeholder="New Username" name="username" />
+        <input type="text" placeholder="New Name" name="fullname" />
         <button disabled={loading}>Update</button>
         <p onClick={handlePasswordReset}>Password Reset</p>
       </form>

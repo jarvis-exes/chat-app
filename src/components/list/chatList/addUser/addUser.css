@@ -16,40 +16,35 @@
     display: flex;
     gap: 20px;
     border-radius: 25px;
-    background-color: #93939356;
     padding: 10px;
 
-    &:hover {
-      background-color: #b7b7b772;
-    }
-
     input {
-      padding: 10px;
+      padding: 15px;
       border: none;
       outline: none;
-      background-color: transparent !important;
+      background-color: #93939356;
+      border-radius: 20px;
       color: white;
-
-      &:focus {
-        background-color: transparent;
-      }
 
       &::placeholder {
         color: rgba(255, 255, 255, 0.452);
+      }
+
+      &:hover {
+        background-color: #9393938b;
       }
     }
 
     button {
       padding: 15px;
       border-radius: 20px;
-
+      border: 1px solid rgba(255, 255, 255, 0.697);
       background-color: #00000061;
       color: white;
-      border: none;
       cursor: pointer;
 
       &:hover {
-        background-color: #cacaca92;
+        background-color: #ffffff92;
         color: black;
       }
 

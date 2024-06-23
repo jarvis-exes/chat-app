@@ -88,7 +88,7 @@ const ChatList = () => {
         {addMode && <AddUser />}
       </div>
       {filteredChats.map((chat) => (
-        <>
+        <div key={chat.chatId}>
           <div
             className={chat?.isSeen ? "item" : "item not-seen"}
             key={chat.chatId}
@@ -106,13 +106,13 @@ const ChatList = () => {
               <span>
                 {chat.user.blocked.includes(currentUser.id)
                   ? "User"
-                  : chat.user.username}
+                  : chat.user.fullname}
               </span>
               <p>{chat.lastMessage}</p>
             </div>
           </div>
           <hr></hr>
-        </>
+        </div>
       ))}
     </div>
   );
