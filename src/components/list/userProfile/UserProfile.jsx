@@ -46,6 +46,7 @@ const UserProfile = () => {
     const querySnapshot = await getDocs(q);
 
     if (!querySnapshot.empty) {
+      setLoading(false);
       return toast.warn("Select another username");
     }
 
