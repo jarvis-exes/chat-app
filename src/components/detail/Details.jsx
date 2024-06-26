@@ -9,17 +9,17 @@ import {
   updateDoc,
   doc,
   onSnapshot,
+  deleteDoc,
+  collection,
+  where,
+  query,
+  getDocs,
+  getDoc,
 } from "firebase/firestore";
 
 const Details = () => {
-  const {
-    chatId,
-    user,
-    isCurrentUserBlocked,
-    isReceiverBlocked,
-    changeBlock,
-    resetChat,
-  } = useChatStore();
+  const { chatId, user, isCurrentUserBlocked, isReceiverBlocked, changeBlock } =
+    useChatStore();
 
   const { currentUser } = useUserStore();
 
@@ -39,9 +39,20 @@ const Details = () => {
     }
   };
 
-  const handleLogout = () => {
-    auth.signOut();
-    resetChat();
+  const handleDelete = async () => {
+    // const chatRef = doc(db, "chats", chatId);
+    // await deleteDoc(chatRef);
+
+    const userchatRef = doc(db, "userchats", currentUser.id);
+    const userDocSnap = await getDoc(userchatRef);
+    const chats = userDocSnap.data();
+
+    const newchat = chats.chats.filter((chat) => {
+      return chat.chatId === chatId;
+    });
+
+    const receiverID = newchat[0].receiverId;
+    console.log(receiverID);
   };
 
   return (
@@ -102,8 +113,8 @@ const Details = () => {
               ? "Unblock"
               : "Block"}
           </button>
-          <button className="logout" onClick={handleLogout}>
-            Logout
+          <button className="logout" onClick={handleDelete}>
+            Delete Chat
           </button>
         </div>
       </div>

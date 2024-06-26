@@ -2,7 +2,15 @@ import React, { useEffect, useState } from "react";
 import "./userProfile.css";
 import { toast } from "react-toastify";
 import { useUserStore } from "../../../lib/userStore";
-import { doc, getDoc, updateDoc } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  updateDoc,
+  where,
+} from "firebase/firestore";
 import upload from "../../../lib/upload";
 import { auth, db } from "../../../lib/firebase";
 import { sendPasswordResetEmail } from "firebase/auth";
@@ -31,6 +39,15 @@ const UserProfile = () => {
 
     const formData = new FormData(e.target);
     const { username, fullname } = Object.fromEntries(formData);
+
+    // VALIDATE UNIQUE USERNAME
+    const usersRef = collection(db, "users");
+    const q = query(usersRef, where("username", "==", username));
+    const querySnapshot = await getDocs(q);
+
+    if (!querySnapshot.empty) {
+      return toast.warn("Select another username");
+    }
 
     try {
       if (avatar.file) {

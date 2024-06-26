@@ -197,6 +197,7 @@ const Chat = () => {
           <input
             type="file"
             id="file"
+            accept="image/*"
             style={{ display: "none" }}
             onChange={handleImg}
             disabled={isCurrentUserBlocked || isReceiverBlocked}
