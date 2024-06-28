@@ -40,19 +40,51 @@ const Details = () => {
   };
 
   const handleDelete = async () => {
-    // const chatRef = doc(db, "chats", chatId);
-    // await deleteDoc(chatRef);
+    try {
+      //Remove chat from chats collection
 
-    const userchatRef = doc(db, "userchats", currentUser.id);
-    const userDocSnap = await getDoc(userchatRef);
-    const chats = userDocSnap.data();
+      const chatRef = doc(db, "chats", chatId);
+      await deleteDoc(chatRef);
 
-    const newchat = chats.chats.filter((chat) => {
-      return chat.chatId === chatId;
-    });
+      //Remove chat from Current User chat list
 
-    const receiverID = newchat[0].receiverId;
-    console.log(receiverID);
+      const userchatRef = doc(db, "userchats", currentUser.id);
+      const userChatSnap = await getDoc(userchatRef);
+      const chats = userChatSnap.data();
+
+      const newChat = chats.chats.filter((chat) => {
+        return chat.chatId === chatId;
+      });
+
+      const receiverID = newChat[0].receiverId;
+
+      const newChats = chats.chats.filter((chat) => {
+        return chat.chatId !== chatId;
+      });
+
+      await updateDoc(userchatRef, {
+        chats: newChats,
+      });
+
+      //Remove chat from Receiver chat list
+
+      const userchatRefRec = doc(db, "userchats", receiverID);
+      const userChatSnapRec = await getDoc(userchatRefRec);
+      const chatsRec = userChatSnapRec.data();
+
+      const newChatsRec = chatsRec.chats.filter((chat) => {
+        return chat.chatId !== chatId;
+      });
+
+      await updateDoc(userchatRefRec, {
+        chats: newChatsRec,
+      });
+    } catch (error) {
+      console.log(error);
+      toast.error("Can't delete the chat!");
+    } finally {
+      location.reload();
+    }
   };
 
   return (

@@ -38,6 +38,7 @@ body {
 .container {
   width: 90vw;
   height: 90vh;
+  min-width: fit-content;
   display: flex;
   background-color: rgba(40, 40, 40, 0.599);
   backdrop-filter: blur(19px) saturate(180%);
