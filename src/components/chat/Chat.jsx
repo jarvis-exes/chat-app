@@ -25,15 +25,14 @@ const Chat = () => {
     url: "",
   });
 
-  const { currentUser } = useUserStore();
-  const { chatId, user, isCurrentUserBlocked, isReceiverBlocked } =
+  const { currentUser, changeDetailsOpen } = useUserStore();
+  const { chatId, user, isCurrentUserBlocked, isReceiverBlocked, resetChat } =
     useChatStore();
 
   const endRef = useRef(null);
 
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: "smooth" });
-    console.log(img);
   }, [chat?.messages]);
 
   useEffect(() => {
@@ -145,6 +144,9 @@ const Chat = () => {
     <div className="chat">
       <div className="top">
         <div className="user">
+          <div className="backButton">
+            <img src="./back.png" alt="" onClick={resetChat} />
+          </div>
           <img src={user?.avatar || "./avatar.png"} alt="" />
           <div className="texts">
             <span>{user?.fullname}</span>
@@ -154,7 +156,7 @@ const Chat = () => {
         <div className="icons">
           <img src="./phone.png" alt="" />
           <img src="./video.png" alt="" />
-          <img src="./info.png" alt="" />
+          <img src="./info.png" alt="" onClick={changeDetailsOpen} />
         </div>
       </div>
       <div className="center">

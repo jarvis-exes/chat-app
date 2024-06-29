@@ -16,6 +16,18 @@
       align-items: center;
       gap: 20px;
 
+      .backButton {
+        img {
+          height: 30px;
+          width: 30px;
+          transition: all 0.1s linear;
+
+          &:hover {
+            transform: scale(1.2);
+          }
+        }
+      }
+
       img {
         width: 55px;
         height: 55px;

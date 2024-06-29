@@ -18,8 +18,14 @@ import {
 } from "firebase/firestore";
 
 const Details = () => {
-  const { chatId, user, isCurrentUserBlocked, isReceiverBlocked, changeBlock } =
-    useChatStore();
+  const {
+    chatId,
+    user,
+    isCurrentUserBlocked,
+    isReceiverBlocked,
+    changeBlock,
+    resetChat,
+  } = useChatStore();
 
   const { currentUser } = useUserStore();
 
@@ -83,7 +89,7 @@ const Details = () => {
       console.log(error);
       toast.error("Can't delete the chat!");
     } finally {
-      location.reload();
+      resetChat();
     }
   };
 
