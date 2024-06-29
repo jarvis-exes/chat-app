@@ -19,6 +19,7 @@ const Chat = () => {
   const [text, setText] = useState("");
   const [chat, setChat] = useState("");
   const [uploadImg, setUploadImg] = useState(false);
+  const [uploading, setUploading] = useState(false);
   const [img, setImg] = useState({
     file: null,
     url: "",
@@ -32,7 +33,8 @@ const Chat = () => {
 
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [chat?.messages || chat?.img]);
+    console.log(img);
+  }, [chat?.messages]);
 
   useEffect(() => {
     const unSub = onSnapshot(doc(db, "chats", chatId), (res) => {
@@ -60,6 +62,7 @@ const Chat = () => {
   };
 
   const sendImg = async () => {
+    setUploading(true);
     let imgUrl = null;
 
     try {
@@ -77,6 +80,7 @@ const Chat = () => {
       console.log(error);
     } finally {
       setUploadImg(false);
+      setUploading(false);
       setImg({
         file: null,
         url: "",
@@ -173,8 +177,11 @@ const Chat = () => {
         {img.url && (
           <div className="message own">
             {uploadImg ? (
-              <div className="uploadButton" onClick={sendImg}>
-                Upload
+              <div
+                className={uploading ? "uploadingButton" : "uploadButton"}
+                onClick={sendImg}
+              >
+                {uploading ? "" : "Upload"}
               </div>
             ) : null}
             <div className="texts">

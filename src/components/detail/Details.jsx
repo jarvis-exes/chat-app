@@ -145,7 +145,7 @@ const Details = () => {
               ? "Unblock"
               : "Block"}
           </button>
-          <button className="logout" onClick={handleDelete}>
+          <button className="deleteButton" onClick={handleDelete}>
             Delete Chat
           </button>
         </div>

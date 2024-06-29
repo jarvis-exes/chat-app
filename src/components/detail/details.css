@@ -108,15 +108,15 @@
 
       button {
         padding: 10px;
-        background-color: rgba(74, 0, 14, 0.5);
-        color: rgb(255, 0, 0);
+        color: rgb(69, 69, 255);
+        background-color: rgba(0, 33, 70, 0.5);
         border-radius: 5px;
         border: none;
         cursor: pointer;
         transition: all 0.2s linear;
 
         &:hover {
-          background-color: rgba(255, 0, 0, 0.882);
+          background-color: rgb(0, 65, 140);
           color: white;
         }
 
@@ -124,12 +124,11 @@
           transform: translateY(1px);
         }
 
-        &.logout {
-          color: rgb(69, 69, 255);
-          background-color: rgba(0, 33, 70, 0.5);
-
+        &.deleteButton {
+          background-color: rgba(74, 0, 14, 0.5);
+          color: rgb(255, 0, 0);
           &:hover {
-            background-color: rgb(0, 65, 140);
+            background-color: rgba(255, 0, 0, 0.882);
             color: white;
           }
         }

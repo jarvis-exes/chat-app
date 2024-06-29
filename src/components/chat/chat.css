@@ -66,6 +66,9 @@
       max-width: 50%;
       display: flex;
       gap: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       position: relative;
 
       &.own {
@@ -81,6 +84,19 @@
           transform: translate(-50%, -50%);
           border-radius: 10px;
           backdrop-filter: blur(20px) saturate(200%);
+        }
+
+        .uploadingButton {
+          position: absolute;
+          width: 80px;
+          height: 80px;
+          border-radius: 50%;
+          border: 5px solid transparent;
+          background-color: rgba(1, 1, 1, 0.392);
+          backdrop-filter: blur(19px) saturate(180%);
+          border-top-color: #ffffff;
+          border-bottom-color: #ffffff;
+          animation: spin 1.2s cubic-bezier(0.5, 0.5, 0.5, 1) infinite;
         }
 
         .texts {
