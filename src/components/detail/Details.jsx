@@ -27,7 +27,7 @@ const Details = () => {
     resetChat,
   } = useChatStore();
 
-  const { currentUser } = useUserStore();
+  const { currentUser, changeDetailsOpen } = useUserStore();
 
   const handleBlock = async () => {
     if (!user) return;
@@ -95,6 +95,9 @@ const Details = () => {
 
   return (
     <div className="detail">
+      <div className="backButton">
+        <img src="./back.png" alt="" onClick={changeDetailsOpen} />
+      </div>
       <div className="user">
         <img src={user?.avatar || "./avatar.png"} alt="" />
         <h2>{user?.fullname}</h2>

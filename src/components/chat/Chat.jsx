@@ -235,13 +235,12 @@ const Chat = () => {
             <EmojiPicker open={open} onEmojiClick={handleEmoji} />
           </div>
         </div>
-        <button
+        <img
           className="sendButton"
+          src="./send.png"
+          alt=""
           onClick={handleSend}
-          disabled={isCurrentUserBlocked || isReceiverBlocked}
-        >
-          Send
-        </button>
+        />
       </div>
     </div>
   );

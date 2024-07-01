@@ -5,9 +5,24 @@
   flex-direction: column;
   max-width: max-content;
 
+  .backButton {
+    img {
+      height: 30px;
+      width: 30px;
+      margin-top: 20px;
+      margin-left: 20px;
+      transition: all 0.1s linear;
+      cursor: pointer;
+
+      &:hover {
+        transform: scale(1.2);
+      }
+    }
+  }
+
   .user {
     padding: 10px;
-    padding-top: 20px;
+    padding-top: 0px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -135,4 +150,7 @@
       }
     }
   }
+}
+
+@keyframes slideIn {
 }

@@ -18,7 +18,8 @@ const App = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      const screenWidth = window.innerWidth;
+      // const screenWidth = window.innerWidth;
+      const screenWidth = screen.width;
       console.log(screenWidth);
 
       if (screenWidth <= 700) {
@@ -51,9 +52,7 @@ const App = () => {
       <>
         {currentUser ? (
           <div className="container">
-            {chatId ? <Chat /> : <List />}
-
-            {chatId && details && <Details />}
+            {chatId && details ? <Details /> : chatId ? <Chat /> : <List />}
           </div>
         ) : (
           <Login />
