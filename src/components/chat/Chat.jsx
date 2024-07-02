@@ -217,8 +217,8 @@ const Chat = () => {
           type="text"
           placeholder={
             isCurrentUserBlocked || isReceiverBlocked
-              ? "You can't send a message"
-              : "Type your message..."
+              ? "User Blocked"
+              : "Type your message"
           }
           value={text}
           onChange={(e) => setText(e.target.value)}

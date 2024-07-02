@@ -4,4 +4,9 @@
   flex-direction: column;
   max-width: max-content;
   border-right: 5px solid #dddddd35;
+
+  @media only screen and (max-width: 768px) {
+    border: none;
+    max-width: 100%;
+  }
 }

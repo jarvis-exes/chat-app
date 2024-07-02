@@ -18,11 +18,11 @@ const App = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      // const screenWidth = window.innerWidth;
-      const screenWidth = screen.width;
+      const screenWidth = window.innerWidth;
+      // const screenWidth = screen.width;
       console.log(screenWidth);
 
-      if (screenWidth <= 700) {
+      if (screenWidth <= 768) {
         setMobileView(true);
         changeDetailsOpen();
       } else {

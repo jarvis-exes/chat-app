@@ -5,6 +5,11 @@
   flex-direction: column;
   max-width: max-content;
 
+  @media only screen and (max-width: 768px) {
+    border: none;
+    max-width: 100%;
+  }
+
   .backButton {
     img {
       height: 30px;
