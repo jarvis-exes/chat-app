@@ -6,7 +6,7 @@ export const useUserStore = create((set) => ({
   currentUser: null,
   isLoading: true,
   updatingProfile: false,
-  details: true,
+  details: false,
   fetchUserInfo: async (uid) => {
     if (!uid) return set({ currentUser: null, isLoading: false });
 

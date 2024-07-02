@@ -147,8 +147,12 @@ const Chat = () => {
           <div className="backButton">
             <img src="./back.png" alt="" onClick={resetChat} />
           </div>
-          <img src={user?.avatar || "./avatar.png"} alt="" />
-          <div className="texts">
+          <img
+            src={user?.avatar || "./avatar.png"}
+            alt=""
+            onClick={changeDetailsOpen}
+          />
+          <div className="texts" onClick={changeDetailsOpen}>
             <span>{user?.fullname}</span>
             <p>{user?.username}</p>
           </div>

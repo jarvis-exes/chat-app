@@ -24,9 +24,9 @@ const App = () => {
 
       if (screenWidth <= 768) {
         setMobileView(true);
-        changeDetailsOpen();
       } else {
         setMobileView(false);
+        changeDetailsOpen();
       }
     };
 
@@ -39,7 +39,7 @@ const App = () => {
     const unSub = onAuthStateChanged(auth, (user) => {
       fetchUserInfo(user?.uid);
     });
-
+    // changeDetailsOpen();
     return () => {
       unSub();
     };
@@ -52,6 +52,7 @@ const App = () => {
       <>
         {currentUser ? (
           <div className="container">
+            {console.log(details)}
             {chatId && details ? <Details /> : chatId ? <Chat /> : <List />}
           </div>
         ) : (
