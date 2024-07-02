@@ -65,7 +65,7 @@ const ChatList = () => {
   };
 
   const filteredChats = chats.filter((c) =>
-    c.user.username.toLowerCase().includes(input.toLowerCase())
+    c.user.fullname.toLowerCase().includes(input.toLowerCase())
   );
 
   return (

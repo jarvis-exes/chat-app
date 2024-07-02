@@ -19,17 +19,15 @@ const App = () => {
   useEffect(() => {
     const handleResize = () => {
       const screenWidth = window.innerWidth;
-      // const screenWidth = screen.width;
-      console.log(screenWidth);
 
       if (screenWidth <= 768) {
         setMobileView(true);
       } else {
         setMobileView(false);
-        changeDetailsOpen();
       }
     };
 
+    handleResize();
     window.addEventListener("resize", handleResize);
 
     return () => window.removeEventListener("resize", handleResize);
@@ -39,7 +37,7 @@ const App = () => {
     const unSub = onAuthStateChanged(auth, (user) => {
       fetchUserInfo(user?.uid);
     });
-    // changeDetailsOpen();
+
     return () => {
       unSub();
     };
@@ -52,7 +50,6 @@ const App = () => {
       <>
         {currentUser ? (
           <div className="container">
-            {console.log(details)}
             {chatId && details ? <Details /> : chatId ? <Chat /> : <List />}
           </div>
         ) : (
@@ -68,7 +65,7 @@ const App = () => {
           <div className="container">
             <List />
             {chatId && <Chat />}
-            {chatId && details && <Details />}
+            {chatId && <Details />}
           </div>
         ) : (
           <Login />

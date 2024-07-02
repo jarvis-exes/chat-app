@@ -45,6 +45,11 @@ body {
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.3);
   animation: opacityAnimation 0.5s ease-in;
+
+  @media only screen and (max-width: 768px) {
+    width: 95vw;
+    height: 95vh;
+  }
 }
 
 .loading {
