@@ -79,13 +79,15 @@ const ChatList = () => {
             onChange={(e) => setInput(e.target.value)}
           />
         </div>
-        <img
-          src="./plus.png"
-          alt=""
-          className={addMode ? "close" : "add"}
-          onClick={() => setAddMode((prev) => !prev)}
-        />
-        {addMode && <AddUser />}
+        <div className="addUserContainer">
+          <img
+            src="./plus.png"
+            alt=""
+            className={addMode ? "close" : "add"}
+            onClick={() => setAddMode((prev) => !prev)}
+          />
+          {addMode && <AddUser />}
+        </div>
       </div>
       {filteredChats.map((chat) => (
         <div key={chat.chatId}>

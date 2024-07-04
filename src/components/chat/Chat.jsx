@@ -160,7 +160,6 @@ const Chat = () => {
         <div className="icons">
           <img src="./phone.png" alt="" />
           <img src="./video.png" alt="" />
-          <img src="./info.png" alt="" onClick={changeDetailsOpen} />
         </div>
       </div>
       <div className="center">

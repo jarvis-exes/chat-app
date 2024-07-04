@@ -56,6 +56,11 @@
       backdrop-filter: blur(8px) saturate(180%);
       animation: opacityAnimation 0.2s ease-in, slide 0.2s ease-in;
 
+      @media only screen and (max-width: 768px) {
+        transform: translateX(-75px);
+        animation: opacityAnimation 0.2s ease-in, slide-mobile 0.2s ease-in;
+      }
+
       .option {
         cursor: pointer;
         padding: 10px 20px;
@@ -77,5 +82,14 @@
   }
   to {
     transform: translateX(0px) translateY(0px) scale(1);
+  }
+}
+
+@keyframes slide-mobile {
+  from {
+    transform: translateX(-55px) translateY(-60px) scale(0);
+  }
+  to {
+    transform: translateX(-75px) translateY(0px) scale(1);
   }
 }

@@ -36,29 +36,32 @@
       transform: scale(1.05);
     }
 
-    .add {
-      width: 40px;
-      height: 40px;
-      background-color: rgba(34, 34, 34, 0.5);
-      padding: 9px;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: all 0.2s linear;
+    .addUserContainer {
+      .add {
+        width: 40px;
+        height: 40px;
+        background-color: rgba(34, 34, 34, 0.5);
+        padding: 9px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.2s linear;
 
-      &:hover {
-        transform: scale(1.15);
+        &:hover {
+          transform: scale(1.15);
+        }
       }
-    }
 
-    .close {
-      z-index: 2;
-      transition: all 0.2s linear;
-      transform: rotate(45deg);
-      width: 40px;
-      height: 40px;
-      padding: 4px;
-      background-color: rgba(34, 34, 34, 0);
-      border-radius: 50%;
+      .close {
+        transition: all 0.2s linear;
+        transform: rotate(45deg);
+        width: 40px;
+        height: 40px;
+        padding: 4px;
+        background-color: rgba(34, 34, 34, 0);
+        border-radius: 50%;
+        position: relative;
+        z-index: 3;
+      }
     }
   }
 

@@ -4,13 +4,25 @@
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.3);
   width: 70vw;
-  /* height: 80vh; */
+  height: 80vh;
+  min-height: max-content;
   display: flex;
   align-items: center;
   justify-content: space-around;
+  flex-direction: row;
   margin: auto;
   padding: 30px;
   animation: opacityAnimation 0.5s ease-in;
+
+  @media only screen and (max-width: 768px) {
+    flex-direction: column;
+    overflow: scroll;
+    background-color: transparent;
+    backdrop-filter: none;
+    border: none;
+    width: 100vw;
+    height: 90vh;
+  }
 
   .item {
     flex: 1;
@@ -18,6 +30,15 @@
     flex-direction: column;
     align-items: center;
     gap: 20px;
+
+    @media only screen and (max-width: 768px) {
+      min-width: 320px;
+      margin: 50px 0px;
+      padding: 40px;
+      border-radius: 20px;
+      background-color: rgba(40, 40, 40, 0.599);
+      backdrop-filter: blur(19px) saturate(180%);
+    }
 
     form {
       display: flex;

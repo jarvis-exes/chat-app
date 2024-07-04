@@ -1,16 +1,19 @@
 .addUser {
   min-width: max-content;
   min-height: max-content;
-  padding: 40px;
+  padding: 40px 16px;
   background-color: rgba(0, 0, 0, 0.648);
   border-radius: 12px;
   position: absolute;
-  left: 240px;
-  top: 100px;
-  margin: auto;
+  margin-top: -50px;
   backdrop-filter: blur(20px) saturate(200%);
-  z-index: 1;
+  z-index: 2;
   animation: slide-in 0.5s ease-in-out 1;
+
+  @media only screen and (max-width: 768px) {
+    transform: translateX(-305px);
+    animation: slide-in-mobile 0.5s ease-in-out 1;
+  }
 
   form {
     display: flex;
@@ -96,11 +99,22 @@
 
 @keyframes slide-in {
   from {
-    transform: translateX(-190px) translateY(-70px) scale(0);
+    transform: translateX(-170px) translateY(-70px) scale(0);
     background-color: rgba(34, 34, 34, 0.5);
   }
   to {
     transform: translateX(0px) translateY(0px) scale(1);
+    background-color: rgba(0, 0, 0, 0.648);
+  }
+}
+
+@keyframes slide-in-mobile {
+  from {
+    transform: translateX(-170px) translateY(-70px) scale(0);
+    background-color: rgba(34, 34, 34, 0.5);
+  }
+  to {
+    transform: translateX(-305px) translateY(0px) scale(1);
     background-color: rgba(0, 0, 0, 0.648);
   }
 }

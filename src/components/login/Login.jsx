@@ -126,6 +126,7 @@ const Login = () => {
           <input
             type="file"
             id="file"
+            accept="image/*"
             style={{ display: "none" }}
             onChange={handleAvatar}
           />
