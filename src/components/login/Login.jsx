@@ -95,6 +95,11 @@ const Login = () => {
     const formData = new FormData(e.target);
     const { email, password } = Object.fromEntries(formData);
 
+    if (!email || !password) {
+      setLoading(false);
+      return toast.warn("Please enter inputs!");
+    }
+
     try {
       await signInWithEmailAndPassword(auth, email, password);
     } catch (error) {
@@ -110,8 +115,13 @@ const Login = () => {
       <div className="item">
         <h2>Welcome Back</h2>
         <form onSubmit={handleLogin}>
-          <input type="text" placeholder="Email" name="email" />
-          <input type="password" placeholder="Password" name="password" />
+          <input type="text" placeholder="Email" name="email" required />
+          <input
+            type="password"
+            placeholder="Password"
+            name="password"
+            required
+          />
           <button disabled={loading}>{loading ? "Loading" : "Sign In"}</button>
         </form>
       </div>
@@ -130,10 +140,15 @@ const Login = () => {
             style={{ display: "none" }}
             onChange={handleAvatar}
           />
-          <input type="text" placeholder="Username" name="username" />
-          <input type="text" placeholder="Full Name" name="fullname" />
-          <input type="text" placeholder="Email" name="email" />
-          <input type="password" placeholder="Password" name="password" />
+          <input type="text" placeholder="Username" name="username" required />
+          <input type="text" placeholder="Full Name" name="fullname" required />
+          <input type="text" placeholder="Email" name="email" required />
+          <input
+            type="password"
+            placeholder="Password"
+            name="password"
+            required
+          />
           <button disabled={loading}>{loading ? "Loading" : "Sign Up"}</button>
         </form>
       </div>

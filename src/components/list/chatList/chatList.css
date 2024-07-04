@@ -37,6 +37,7 @@
     }
 
     .addUserContainer {
+      margin-top: 4px;
       .add {
         width: 40px;
         height: 40px;

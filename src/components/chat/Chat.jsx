@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import "./chat.css";
 import EmojiPicker from "emoji-picker-react";
 import { db } from "../../lib/firebase";
+import { toast } from "react-toastify";
 import {
   arrayUnion,
   doc,
@@ -88,7 +89,17 @@ const Chat = () => {
   };
 
   const handleSend = async () => {
-    if (text === "") return;
+    if (text.trim().length === 0) return;
+
+    if (isCurrentUserBlocked) {
+      toast.error("You are Blocked!");
+      return;
+    }
+
+    if (isReceiverBlocked) {
+      toast.error("User is Blocked!");
+      return;
+    }
 
     try {
       await updateDoc(doc(db, "chats", chatId), {
@@ -198,7 +209,14 @@ const Chat = () => {
       </div>
       <div className="bottom">
         <div className="icons">
-          <label htmlFor="file">
+          <label
+            htmlFor="file"
+            style={
+              isCurrentUserBlocked || isReceiverBlocked
+                ? { display: "none" }
+                : null
+            }
+          >
             <img
               src="./img.png"
               alt=""
@@ -228,7 +246,14 @@ const Chat = () => {
           onKeyDown={handleKeyPress}
           disabled={isCurrentUserBlocked || isReceiverBlocked}
         />
-        <div className="emoji">
+        <div
+          className="emoji"
+          style={
+            isCurrentUserBlocked || isReceiverBlocked
+              ? { display: "none" }
+              : null
+          }
+        >
           <img
             src="./emoji.png"
             alt=""
