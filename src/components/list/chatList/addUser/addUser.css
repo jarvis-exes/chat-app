@@ -1,97 +1,97 @@
 .addUser {
   min-width: max-content;
   min-height: max-content;
-  padding: 40px 16px;
+  padding: 40px 20px 10px 20px;
   background-color: rgba(0, 0, 0, 0.648);
   border-radius: 12px;
   position: absolute;
-  margin-top: -50px;
+  margin-top: -46px;
   backdrop-filter: blur(20px) saturate(200%);
   z-index: 2;
   animation: slide-in 0.5s ease-in-out 1;
 
   @media only screen and (max-width: 768px) {
-    transform: translateX(-305px);
+    transform: translateX(-310px);
+    margin-top: -50px;
     animation: slide-in-mobile 0.5s ease-in-out 1;
   }
 
-  form {
-    display: flex;
-    gap: 20px;
-    border-radius: 25px;
-    padding: 10px;
+  input {
+    padding: 15px;
+    border: none;
+    outline: none;
+    background-color: #93939356;
+    border-radius: 20px;
+    color: white;
+    width: 100%;
+    margin: 20px 0px;
 
-    input {
-      padding: 15px;
-      border: none;
-      outline: none;
-      background-color: #93939356;
-      border-radius: 20px;
-      color: white;
-
-      &::placeholder {
-        color: rgba(255, 255, 255, 0.452);
-      }
-
-      &:hover {
-        background-color: #9393938b;
-      }
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.452);
     }
 
-    button {
-      padding: 15px;
-      border-radius: 20px;
-      border: 1px solid rgba(255, 255, 255, 0.697);
-      background-color: #00000061;
-      color: white;
-      cursor: pointer;
-
-      &:hover {
-        background-color: #ffffff92;
-        color: black;
-      }
-
-      &:active {
-        transform: translateY(1px);
-      }
+    &:hover {
+      background-color: #9393938b;
     }
   }
 
-  .user {
-    margin-top: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  .users {
+    overflow: auto;
+    height: 50vh;
+    padding: 0px 10px;
 
-    .details {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      font-weight: 500;
-
-      img {
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        object-fit: cover;
-      }
+    &::-webkit-scrollbar-thumb {
+      background-color: rgba(111, 111, 111, 0.348);
+      border-radius: 5px;
     }
 
-    button {
-      padding: 10px;
-      border-radius: 10px;
-      background-color: #01a60fd0;
-      color: white;
-      border: none;
-      cursor: pointer;
+    .user {
+      margin-top: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
 
-      &:hover {
-        background-color: #007c0ab8;
+      .details {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        font-weight: 500;
+
+        img {
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          object-fit: cover;
+        }
+
+        .nameAndUsername {
+          display: flex;
+          flex-direction: column;
+
+          p {
+            font-size: small;
+            color: rgba(247, 255, 97, 0.615);
+          }
+        }
       }
 
-      &:disabled {
-        cursor: not-allowed;
-        background-color: rgb(0, 73, 146);
+      button {
+        padding: 10px;
+        border-radius: 10px;
+        background-color: #01a60fd0;
+        color: white;
+        border: none;
+        cursor: pointer;
+        margin-left: 20px;
+
+        &:hover {
+          background-color: #007c0ab8;
+        }
+
+        &:disabled {
+          cursor: not-allowed;
+          background-color: rgb(0, 73, 146);
+        }
       }
     }
   }
@@ -99,7 +99,7 @@
 
 @keyframes slide-in {
   from {
-    transform: translateX(-170px) translateY(-70px) scale(0);
+    transform: translateX(-150px) translateY(-210px) scale(0);
     background-color: rgba(34, 34, 34, 0.5);
   }
   to {
@@ -110,11 +110,11 @@
 
 @keyframes slide-in-mobile {
   from {
-    transform: translateX(-170px) translateY(-70px) scale(0);
+    transform: translateX(-150px) translateY(-210px) scale(0);
     background-color: rgba(34, 34, 34, 0.5);
   }
   to {
-    transform: translateX(-305px) translateY(0px) scale(1);
+    transform: translateX(-310px) translateY(0px) scale(1);
     background-color: rgba(0, 0, 0, 0.648);
   }
 }

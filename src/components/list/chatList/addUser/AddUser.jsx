@@ -8,6 +8,7 @@ import {
   doc,
   getDoc,
   getDocs,
+  onSnapshot,
   query,
   serverTimestamp,
   setDoc,
@@ -17,55 +18,84 @@ import {
 
 const AddUser = () => {
   const [user, setUser] = useState(null);
+  const [users, setUsers] = useState([]);
   const [added, setAdded] = useState(false);
+  const [input, setInput] = useState("");
   const { currentUser } = useUserStore();
 
   useEffect(() => {
-    async function checkUserAdded() {
+    const loadUsers = async () => {
+      const userRef = collection(db, "users");
+      const usersRef = await getDocs(userRef);
+      const allDocs = [];
+      usersRef.forEach((doc) => {
+        const data = doc.data();
+
+        allDocs.push({ ...data });
+      });
+      setUsers(allDocs);
+    };
+
+    loadUsers();
+  }, []);
+
+  useEffect(() => {
+    const checkUserAdded = async () => {
       // Handle Already Added User
-      if (user) {
-        if (user.id === currentUser.id) {
-          setAdded(true);
-          return;
-        }
+      const userChatRef = doc(db, "userchats", currentUser.id);
+      const userChatsSnapshot = await getDoc(userChatRef);
+      const userChatsData = await userChatsSnapshot.data();
 
-        const userChatRef = doc(db, "userchats", currentUser.id);
-        const userChatsSnapshot = await getDoc(userChatRef);
-        const userChatsData = await userChatsSnapshot.data();
+      if (users) {
+        // users.map((user) =>
+        //   user.id === currentUser.id ? (user.added = true) : null
+        // );
 
-        userChatsData.chats.map((chat) => {
-          if (chat.receiverId === user.id) {
-            setAdded(true);
+        users.map((user) => {
+          if (user.id === currentUser.id) {
+            user.added = true;
+            return;
           }
+          userChatsData.chats.map((chat) => {
+            if (chat.receiverId === user.id) {
+              user.added = true;
+              return;
+            } else {
+              user.added = false;
+            }
+            console.log("receiver id ", chat.receiverId);
+            console.log("user id ", user.id);
+            console.log(chat.receiverId === user.id);
+          });
         });
       }
-    }
-
+    };
+    console.log(users);
     checkUserAdded();
-  }, [user]);
+  }, [users]);
 
-  const handleSearch = async (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    const username = formData.get("username");
+  // const handleSearch = async (e) => {
+  //   e.preventDefault();
+  //   const formData = new FormData(e.target);
+  //   const username = formData.get("username");
 
-    try {
-      const userRef = collection(db, "users");
-      const q = query(userRef, where("username", "==", username));
+  //   try {
+  //     const userRef = collection(db, "users");
+  //     const q = query(userRef, where("username", "==", username));
 
-      const querySnapShot = await getDocs(q);
+  //     const querySnapShot = await getDocs(q);
 
-      if (!querySnapShot.empty) {
-        setUser(querySnapShot.docs[0].data());
-        setAdded(false);
-      }
-    } catch (error) {
-      console.log(error);
-      toast.error("Can't Search for Users");
-    }
-  };
+  //     if (!querySnapShot.empty) {
+  //       setUser(querySnapShot.docs[0].data());
+  //       setAdded(false);
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //     toast.error("Can't Search for Users");
+  //   }
+  // };
 
-  const handleAdd = async () => {
+  const handleAdd = async (user) => {
     const chatRef = collection(db, "chats");
     const userChatRef = collection(db, "userchats");
 
@@ -101,23 +131,39 @@ const AddUser = () => {
     }
   };
 
+  const filteredUsers = users.filter((c) =>
+    c.fullname.toLowerCase().includes(input.toLowerCase())
+  );
+
   return (
     <div className="addUser">
-      <form onSubmit={handleSearch}>
-        <input type="text" placeholder="Username" name="username" />
-        <button>Search</button>
-      </form>
-      {user && (
-        <div className="user">
-          <div className="details">
-            <img src={user.avatar || "./avatar.png"} alt="" />
-            <span>{user.username}</span>
+      <input
+        type="text"
+        placeholder="Username"
+        name="username"
+        onChange={(e) => setInput(e.target.value)}
+      />
+      <div className="users">
+        {filteredUsers.map((user) => (
+          <div className="user" key={user.id}>
+            <div className="details">
+              <img src={user.avatar || "./avatar.png"} alt="" />
+              <div className="nameAndUsername">
+                <span>{user.fullname}</span>
+                <p>{user.username}</p>
+              </div>
+            </div>
+            <button
+              onClick={() => {
+                handleAdd(user);
+              }}
+              disabled={user.added}
+            >
+              {user.added ? "Added" : "Add User"}
+            </button>
           </div>
-          <button onClick={handleAdd} disabled={added}>
-            {added ? "Added" : "Add User"}
-          </button>
-        </div>
-      )}
+        ))}
+      </div>
     </div>
   );
 };
