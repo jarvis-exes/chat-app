@@ -17,9 +17,7 @@ import {
 } from "firebase/firestore";
 
 const AddUser = () => {
-  const [user, setUser] = useState(null);
   const [users, setUsers] = useState([]);
-  const [added, setAdded] = useState(false);
   const [input, setInput] = useState("");
   const { currentUser } = useUserStore();
 
@@ -27,73 +25,31 @@ const AddUser = () => {
     const loadUsers = async () => {
       const userRef = collection(db, "users");
       const usersRef = await getDocs(userRef);
+
+      // Handle Already Added User
+      const userChatRef = doc(db, "userchats", currentUser.id);
+      const userChatsSnapshot = await getDoc(userChatRef);
+      const userChatsData = await userChatsSnapshot.data();
+
       const allDocs = [];
       usersRef.forEach((doc) => {
         const data = doc.data();
-
+        if (data.id === currentUser.id) {
+          data.added = true;
+        } else {
+          userChatsData.chats.map((chat) => {
+            if (chat.receiverId === data.id) {
+              data.added = true;
+            }
+          });
+        }
         allDocs.push({ ...data });
       });
       setUsers(allDocs);
     };
 
     loadUsers();
-  }, []);
-
-  useEffect(() => {
-    const checkUserAdded = async () => {
-      // Handle Already Added User
-      const userChatRef = doc(db, "userchats", currentUser.id);
-      const userChatsSnapshot = await getDoc(userChatRef);
-      const userChatsData = await userChatsSnapshot.data();
-
-      if (users) {
-        // users.map((user) =>
-        //   user.id === currentUser.id ? (user.added = true) : null
-        // );
-
-        users.map((user) => {
-          if (user.id === currentUser.id) {
-            user.added = true;
-            return;
-          }
-          userChatsData.chats.map((chat) => {
-            if (chat.receiverId === user.id) {
-              user.added = true;
-              return;
-            } else {
-              user.added = false;
-            }
-            console.log("receiver id ", chat.receiverId);
-            console.log("user id ", user.id);
-            console.log(chat.receiverId === user.id);
-          });
-        });
-      }
-    };
-    console.log(users);
-    checkUserAdded();
   }, [users]);
-
-  // const handleSearch = async (e) => {
-  //   e.preventDefault();
-  //   const formData = new FormData(e.target);
-  //   const username = formData.get("username");
-
-  //   try {
-  //     const userRef = collection(db, "users");
-  //     const q = query(userRef, where("username", "==", username));
-
-  //     const querySnapShot = await getDocs(q);
-
-  //     if (!querySnapShot.empty) {
-  //       setUser(querySnapShot.docs[0].data());
-  //       setAdded(false);
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //     toast.error("Can't Search for Users");
-  //   }
-  // };
 
   const handleAdd = async (user) => {
     const chatRef = collection(db, "chats");
@@ -124,8 +80,6 @@ const AddUser = () => {
           updatedAt: Date.now(),
         }),
       });
-
-      setAdded(true);
     } catch (error) {
       console.log(error);
     }

@@ -1,7 +1,6 @@
 .addUser {
   min-width: max-content;
-  min-height: max-content;
-  padding: 40px 20px 10px 20px;
+  padding: 40px 10px 10px 10px;
   background-color: rgba(0, 0, 0, 0.648);
   border-radius: 12px;
   position: absolute;
@@ -11,7 +10,7 @@
   animation: slide-in 0.5s ease-in-out 1;
 
   @media only screen and (max-width: 768px) {
-    transform: translateX(-310px);
+    transform: translateX(-285px);
     margin-top: -50px;
     animation: slide-in-mobile 0.5s ease-in-out 1;
   }
@@ -25,6 +24,7 @@
     color: white;
     width: 100%;
     margin: 20px 0px;
+    transition: all 0.2s linear;
 
     &::placeholder {
       color: rgba(255, 255, 255, 0.452);
@@ -37,8 +37,9 @@
 
   .users {
     overflow: auto;
-    height: 50vh;
-    padding: 0px 10px;
+    height: max-content;
+    max-height: 50vh;
+    padding: 0px 20px 20px 10px;
 
     &::-webkit-scrollbar-thumb {
       background-color: rgba(111, 111, 111, 0.348);
@@ -46,7 +47,7 @@
     }
 
     .user {
-      margin-top: 50px;
+      margin-top: 30px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -110,11 +111,11 @@
 
 @keyframes slide-in-mobile {
   from {
-    transform: translateX(-150px) translateY(-210px) scale(0);
+    transform: translateX(-140px) translateY(-210px) scale(0);
     background-color: rgba(34, 34, 34, 0.5);
   }
   to {
-    transform: translateX(-310px) translateY(0px) scale(1);
+    transform: translateX(-285px) translateY(0px) scale(1);
     background-color: rgba(0, 0, 0, 0.648);
   }
 }

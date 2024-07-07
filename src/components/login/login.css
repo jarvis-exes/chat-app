@@ -16,7 +16,7 @@
 
   @media only screen and (max-width: 768px) {
     flex-direction: column;
-    overflow: scroll;
+    overflow: auto;
     background-color: transparent;
     backdrop-filter: none;
     border: none;
