@@ -21,39 +21,46 @@ const AddUser = () => {
   const [input, setInput] = useState("");
   const { currentUser } = useUserStore();
 
-  useEffect(() => {
-    const loadUsers = async () => {
-      const userRef = collection(db, "users");
-      const usersRef = await getDocs(userRef);
+  const loadUsers = async () => {
+    const userDocRef = doc(db, "users", currentUser.id);
+    const userDocSnapshot = await getDoc(userDocRef);
+    const userDocData = await userDocSnapshot.data();
 
-      // Handle Already Added User
-      const userChatRef = doc(db, "userchats", currentUser.id);
-      const userChatsSnapshot = await getDoc(userChatRef);
-      const userChatsData = await userChatsSnapshot.data();
+    const userRef = collection(db, "users");
+    const usersRef = await getDocs(userRef);
 
-      const allDocs = [];
-      usersRef.forEach((doc) => {
-        const data = doc.data();
-        if (data.id === currentUser.id) {
+    // Handle Already Added User
+    const userChatRef = doc(db, "userchats", currentUser.id);
+    const userChatsSnapshot = await getDoc(userChatRef);
+    const userChatsData = await userChatsSnapshot.data();
+
+    // console.log(usersRef);
+
+    const allDocs = [];
+    usersRef.forEach((doc) => {
+      const data = doc.data();
+      userDocData.chats.map((chat) => {
+        if (chat === data.id) {
           data.added = true;
-        } else {
-          userChatsData.chats.map((chat) => {
-            if (chat.receiverId === data.id) {
-              data.added = true;
-            }
-          });
         }
-        allDocs.push({ ...data });
       });
-      setUsers(allDocs);
-    };
 
+      allDocs.push({ ...data });
+    });
+
+    setUsers(allDocs);
+  };
+
+  useEffect(() => {
     loadUsers();
-  }, [users]);
+  }, []);
 
   const handleAdd = async (user) => {
     const chatRef = collection(db, "chats");
     const userChatRef = collection(db, "userchats");
+
+    const userDocRef = doc(db, "users", currentUser.id);
+    const userDocRefReceiver = doc(db, "users", user.id);
 
     try {
       const newChatRef = doc(chatRef);
@@ -80,8 +87,18 @@ const AddUser = () => {
           updatedAt: Date.now(),
         }),
       });
+
+      await updateDoc(userDocRef, {
+        chats: arrayUnion(user.id),
+      });
+
+      await updateDoc(userDocRefReceiver, {
+        chats: arrayUnion(currentUser.id),
+      });
     } catch (error) {
       console.log(error);
+    } finally {
+      loadUsers();
     }
   };
 

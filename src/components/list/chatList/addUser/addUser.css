@@ -1,5 +1,5 @@
 .addUser {
-  min-width: max-content;
+  min-width: 360px;
   padding: 40px 10px 10px 10px;
   background-color: rgba(0, 0, 0, 0.648);
   border-radius: 12px;
@@ -7,12 +7,11 @@
   margin-top: -46px;
   backdrop-filter: blur(20px) saturate(200%);
   z-index: 2;
-  animation: slide-in 0.5s ease-in-out 1;
+  animation: opacityAnimation 0.5s ease-in-out 1;
 
   @media only screen and (max-width: 768px) {
-    transform: translateX(-285px);
+    transform: translateX(-315px);
     margin-top: -50px;
-    animation: slide-in-mobile 0.5s ease-in-out 1;
   }
 
   input {
@@ -84,6 +83,7 @@
         border: none;
         cursor: pointer;
         margin-left: 20px;
+        width: 80px;
 
         &:hover {
           background-color: #007c0ab8;
@@ -95,27 +95,5 @@
         }
       }
     }
-  }
-}
-
-@keyframes slide-in {
-  from {
-    transform: translateX(-150px) translateY(-210px) scale(0);
-    background-color: rgba(34, 34, 34, 0.5);
-  }
-  to {
-    transform: translateX(0px) translateY(0px) scale(1);
-    background-color: rgba(0, 0, 0, 0.648);
-  }
-}
-
-@keyframes slide-in-mobile {
-  from {
-    transform: translateX(-140px) translateY(-210px) scale(0);
-    background-color: rgba(34, 34, 34, 0.5);
-  }
-  to {
-    transform: translateX(-285px) translateY(0px) scale(1);
-    background-color: rgba(0, 0, 0, 0.648);
   }
 }

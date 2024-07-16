@@ -86,6 +86,20 @@ const Details = () => {
       await updateDoc(userchatRefRec, {
         chats: newChatsRec,
       });
+
+      //Remove chat from current user's chats array
+      const userDocRef = doc(db, "users", currentUser.id);
+
+      await updateDoc(userDocRef, {
+        chats: arrayRemove(receiverID),
+      });
+
+      //Remove chat from receiver user's chats array
+      const userDocRefReceiver = doc(db, "users", receiverID);
+
+      await updateDoc(userDocRefReceiver, {
+        chats: arrayRemove(currentUser.id),
+      });
     } catch (error) {
       console.log(error);
       toast.error("Can't delete the chat!");

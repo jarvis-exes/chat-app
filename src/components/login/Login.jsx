@@ -72,6 +72,7 @@ const Login = () => {
         ...(imgUrl && { avatar: imgUrl }),
         id: res.user.uid,
         blocked: [],
+        chats: [res.user.uid],
       });
 
       await setDoc(doc(db, "userchats", res.user.uid), {
