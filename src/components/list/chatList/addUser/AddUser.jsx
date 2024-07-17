@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./addUser.css";
 import { db } from "../../../../lib/firebase";
 import { useUserStore } from "../../../../lib/userStore";
@@ -8,12 +8,9 @@ import {
   doc,
   getDoc,
   getDocs,
-  onSnapshot,
-  query,
   serverTimestamp,
   setDoc,
   updateDoc,
-  where,
 } from "firebase/firestore";
 
 const AddUser = () => {
@@ -30,11 +27,6 @@ const AddUser = () => {
     const usersRef = await getDocs(userRef);
 
     // Handle Already Added User
-    const userChatRef = doc(db, "userchats", currentUser.id);
-    const userChatsSnapshot = await getDoc(userChatRef);
-    const userChatsData = await userChatsSnapshot.data();
-
-    // console.log(usersRef);
 
     const allDocs = [];
     usersRef.forEach((doc) => {
@@ -115,25 +107,29 @@ const AddUser = () => {
         onChange={(e) => setInput(e.target.value)}
       />
       <div className="users">
-        {filteredUsers.map((user) => (
-          <div className="user" key={user.id}>
-            <div className="details">
-              <img src={user.avatar || "./avatar.png"} alt="" />
-              <div className="nameAndUsername">
-                <span>{user.fullname}</span>
-                <p>{user.username}</p>
+        {filteredUsers.length === 0 ? (
+          <div className="noUsers">No Users</div>
+        ) : (
+          filteredUsers.map((user) => (
+            <div className="user" key={user.id}>
+              <div className="details">
+                <img src={user.avatar || "./avatar.png"} alt="" />
+                <div className="nameAndUsername">
+                  <span>{user.fullname}</span>
+                  <p>{user.username}</p>
+                </div>
               </div>
+              <button
+                onClick={() => {
+                  handleAdd(user);
+                }}
+                disabled={user.added}
+              >
+                {user.added ? "Added" : "Add User"}
+              </button>
             </div>
-            <button
-              onClick={() => {
-                handleAdd(user);
-              }}
-              disabled={user.added}
-            >
-              {user.added ? "Added" : "Add User"}
-            </button>
-          </div>
-        ))}
+          ))
+        )}
       </div>
     </div>
   );

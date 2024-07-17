@@ -1,14 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./userInfo.css";
 import { useUserStore } from "../../../lib/userStore";
 import UserProfile from "../userProfile/UserProfile";
 import { auth } from "../../../lib/firebase";
 import { useChatStore } from "../../../lib/chatStore";
+import useClickOutside from "../../customHooks/ClickOutside";
 
 const UserInfo = () => {
   const { currentUser, updatingProfile, changeProfileOpen } = useUserStore();
   const { resetChat } = useChatStore();
   const [moreDropdown, setMoreDropdown] = useState(false);
+
+  const elementRef = useRef(null);
+
+  const handleClose = () => {
+    setMoreDropdown(false);
+  };
+
+  useClickOutside(elementRef, handleClose);
 
   const handleOpenProfile = () => {
     changeProfileOpen();
@@ -38,7 +47,7 @@ const UserInfo = () => {
             onClick={() => setMoreDropdown((prev) => !prev)}
           />
           {moreDropdown && (
-            <div className="dropdown">
+            <div ref={elementRef} className="dropdown">
               <span className="option" onClick={handleOpenProfile}>
                 Edit Profile
               </span>

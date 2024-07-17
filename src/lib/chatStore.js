@@ -6,6 +6,7 @@ export const useChatStore = create((set) => ({
   user: null,
   isCurrentUserBlocked: false,
   isReceiverBlocked: false,
+  imgSrc: "",
   changeChat: (chatId, user) => {
     const currentUser = useUserStore.getState().currentUser;
 
@@ -40,6 +41,10 @@ export const useChatStore = create((set) => ({
 
   changeBlock: () => {
     set((state) => ({ ...state, isReceiverBlocked: !state.isReceiverBlocked }));
+  },
+
+  changeImgViewerState: (url) => {
+    set((state) => ({ ...state, imgSrc: url }));
   },
 
   resetChat: () => {

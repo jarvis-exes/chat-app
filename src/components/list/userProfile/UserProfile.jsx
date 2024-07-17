@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./userProfile.css";
 import { toast } from "react-toastify";
 import { useUserStore } from "../../../lib/userStore";
+import { useChatStore } from "../../../lib/chatStore";
 import {
   collection,
   doc,
@@ -14,15 +15,26 @@ import {
 import upload from "../../../lib/upload";
 import { auth, db } from "../../../lib/firebase";
 import { sendPasswordResetEmail } from "firebase/auth";
+import useClickOutside from "../../customHooks/ClickOutside";
 
 const UserProfile = () => {
-  const { currentUser, changeProfileOpen } = useUserStore();
+  const { currentUser, updatingProfile, changeProfileOpen } = useUserStore();
+  const { imgSrc, changeImgViewerState } = useChatStore();
+
   const [loading, setLoading] = useState(false);
   let imgUrl = null;
   const [avatar, setAvatar] = useState({
     file: null,
     url: "",
   });
+
+  const elementRef = useRef(null);
+
+  const handleClose = () => {
+    updatingProfile ? changeProfileOpen() : null;
+  };
+
+  useClickOutside(elementRef, handleClose);
 
   const handleAvatar = (e) => {
     if (e.target.files[0]) {
@@ -84,7 +96,7 @@ const UserProfile = () => {
   };
 
   return (
-    <div className="userProfile">
+    <div ref={elementRef} className="userProfile">
       <img
         src="plus.png"
         alt=""
@@ -93,20 +105,23 @@ const UserProfile = () => {
       />
       <h1>Profile</h1>
       <form onSubmit={handleUpdate}>
-        <label htmlFor="file">
+        <div className="profileImageContainer">
           <img
             src={avatar.url ? avatar.url : currentUser.avatar || "./avatar.png"}
             alt=""
+            onClick={() =>
+              changeImgViewerState(currentUser.avatar || "./avatar.png")
+            }
           />
-          Change Avatar
-        </label>
-        <input
-          type="file"
-          id="file"
-          accept="image/*"
-          style={{ display: "none" }}
-          onChange={handleAvatar}
-        />
+          <label htmlFor="file">Change Avatar</label>
+          <input
+            type="file"
+            id="file"
+            accept="image/*"
+            style={{ display: "none" }}
+            onChange={handleAvatar}
+          />
+        </div>
         <input type="text" placeholder="New Username" name="username" />
         <input type="text" placeholder="New Name" name="fullname" />
         <button disabled={loading}>Update</button>

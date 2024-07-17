@@ -45,6 +45,10 @@
       border-radius: 5px;
     }
 
+    .noUsers {
+      text-align: center;
+    }
+
     .user {
       margin-top: 30px;
       display: flex;

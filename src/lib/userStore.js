@@ -6,6 +6,7 @@ export const useUserStore = create((set) => ({
   currentUser: null,
   isLoading: true,
   updatingProfile: false,
+  addUser: false,
   details: false,
   fetchUserInfo: async (uid) => {
     if (!uid) return set({ currentUser: null, isLoading: false });
@@ -22,6 +23,10 @@ export const useUserStore = create((set) => ({
 
   changeProfileOpen: () => {
     set((state) => ({ ...state, updatingProfile: !state.updatingProfile }));
+  },
+
+  changeAddUserOpen: () => {
+    set((state) => ({ ...state, addUser: !state.addUser }));
   },
 
   changeDetailsOpen: () => {

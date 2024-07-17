@@ -1,18 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "./chatList.css";
 import AddUser from "./addUser/AddUser";
 import { useUserStore } from "../../../lib/userStore";
 import { doc, getDoc, onSnapshot, updateDoc } from "firebase/firestore";
 import { db } from "../../../lib/firebase";
 import { useChatStore } from "../../../lib/chatStore";
+import useClickOutside from "../../customHooks/ClickOutside";
 
 const ChatList = () => {
   const [chats, setChats] = useState([]);
-  const [addMode, setAddMode] = useState(false);
   const [input, setInput] = useState("");
 
-  const { currentUser } = useUserStore();
+  const { currentUser, changeAddUserOpen, addUser } = useUserStore();
   const { changeChat } = useChatStore();
+
+  const elementRef = useRef(null);
+
+  const handleClose = () => {
+    addUser ? changeAddUserOpen() : null;
+  };
+
+  useClickOutside(elementRef, handleClose);
 
   useEffect(() => {
     const unSub = onSnapshot(
@@ -79,14 +87,14 @@ const ChatList = () => {
             onChange={(e) => setInput(e.target.value)}
           />
         </div>
-        <div className="addUserContainer">
+        <div ref={elementRef} className="addUserContainer">
           <img
             src="./plus.png"
             alt=""
-            className={addMode ? "close" : "add"}
-            onClick={() => setAddMode((prev) => !prev)}
+            className={addUser ? "close" : "add"}
+            onClick={() => changeAddUserOpen()}
           />
-          {addMode && <AddUser />}
+          {addUser && <AddUser />}
         </div>
       </div>
       {filteredChats.map((chat) => (

@@ -26,6 +26,8 @@ const Details = () => {
     isReceiverBlocked,
     changeBlock,
     resetChat,
+    imgSrc,
+    changeImgViewerState,
   } = useChatStore();
 
   const { currentUser, changeDetailsOpen } = useUserStore();
@@ -114,7 +116,11 @@ const Details = () => {
         <img src="./back.png" alt="" onClick={changeDetailsOpen} />
       </div>
       <div className="user">
-        <img src={user?.avatar || "./avatar.png"} alt="" />
+        <img
+          src={user?.avatar || "./avatar.png"}
+          alt=""
+          onClick={() => changeImgViewerState(user?.avatar || "./avatar.png")}
+        />
         <h2>{user?.fullname}</h2>
         <p>{user?.username}</p>
       </div>

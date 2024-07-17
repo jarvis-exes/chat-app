@@ -14,6 +14,7 @@ import { useChatStore } from "../../lib/chatStore";
 import { useUserStore } from "../../lib/userStore";
 import upload from "../../lib/upload";
 import { format } from "timeago.js";
+import ImageViewer from "../imageViewer/ImageViewer";
 
 const Chat = () => {
   const [open, setOpen] = useState(false);
@@ -27,8 +28,15 @@ const Chat = () => {
   });
 
   const { currentUser, changeDetailsOpen } = useUserStore();
-  const { chatId, user, isCurrentUserBlocked, isReceiverBlocked, resetChat } =
-    useChatStore();
+  const {
+    chatId,
+    user,
+    isCurrentUserBlocked,
+    isReceiverBlocked,
+    resetChat,
+    imgSrc,
+    changeImgViewerState,
+  } = useChatStore();
 
   const endRef = useRef(null);
 
@@ -152,65 +160,112 @@ const Chat = () => {
   };
 
   return (
-    <div className="chat">
-      <div className="top">
-        <div className="user">
-          <div className="backButton">
-            <img src="./back.png" alt="" onClick={resetChat} />
-          </div>
-          <img
-            src={user?.avatar || "./avatar.png"}
-            alt=""
-            onClick={changeDetailsOpen}
-          />
-          <div className="texts" onClick={changeDetailsOpen}>
-            <span>{user?.fullname}</span>
-            <p>{user?.username}</p>
-          </div>
-        </div>
-        <div className="icons">
-          <img src="./phone.png" alt="" />
-          {/* <img src="./video.png" alt="" /> */}
-        </div>
-      </div>
-      <div className="center">
-        {chat?.messages?.map((message) => (
-          <div
-            className={
-              message.senderId === currentUser?.id ? "message own" : "message"
-            }
-            key={message?.createdAt}
-          >
-            <div className="texts">
-              {message.img && <img src={message.img} alt="" />}
-              {message.text && <p>{message.text}</p>}
-              {message.text || message.img ? (
-                <span>{format(message.createdAt.toDate())}</span>
-              ) : null}
+    <>
+      <div className="chat">
+        <div className="top">
+          <div className="user">
+            <div className="backButton">
+              <img src="./back.png" alt="" onClick={resetChat} />
+            </div>
+            <img
+              src={user?.avatar || "./avatar.png"}
+              alt=""
+              onClick={changeDetailsOpen}
+            />
+            <div className="texts" onClick={changeDetailsOpen}>
+              <span>{user?.fullname}</span>
+              <p>{user?.username}</p>
             </div>
           </div>
-        ))}
-        {img.url && (
-          <div className="message own">
-            {uploadImg ? (
-              <div
-                className={uploading ? "uploadingButton" : "uploadButton"}
-                onClick={sendImg}
-              >
-                {uploading ? "" : "Upload"}
+          <div className="icons">
+            <img src="./phone.png" alt="" />
+            {/* <img src="./video.png" alt="" /> */}
+          </div>
+        </div>
+        <div className="center">
+          {chat?.messages?.map((message) => (
+            <div
+              className={
+                message.senderId === currentUser?.id ? "message own" : "message"
+              }
+              key={message?.createdAt}
+            >
+              <div className="texts">
+                {message.img && (
+                  <img
+                    className="imgMessage"
+                    src={message.img}
+                    alt=""
+                    onClick={() => changeImgViewerState(message.img)}
+                  />
+                )}
+                {message.text && <p>{message.text}</p>}
+                {message.text || message.img ? (
+                  <span>{format(message.createdAt.toDate())}</span>
+                ) : null}
               </div>
-            ) : null}
-            <div className="texts">
-              <img src={img.url} alt="" />
             </div>
+          ))}
+          {img.url && (
+            <div className="message own">
+              <div className="texts">
+                <div className="imageContainer">
+                  <img src={img.url} alt="" />
+                  {uploadImg ? (
+                    <div
+                      className={uploading ? "uploadingButton" : "uploadButton"}
+                      onClick={sendImg}
+                    >
+                      {uploading ? "" : "Upload"}
+                    </div>
+                  ) : null}
+                </div>
+              </div>
+            </div>
+          )}
+          <div ref={endRef}></div>
+        </div>
+        <div className="bottom">
+          <div className="icons">
+            <label
+              htmlFor="file"
+              style={
+                isCurrentUserBlocked || isReceiverBlocked
+                  ? { display: "none" }
+                  : null
+              }
+            >
+              <img
+                src="./img.png"
+                alt=""
+                disabled={isCurrentUserBlocked || isReceiverBlocked}
+              />
+            </label>
+            <input
+              type="file"
+              id="file"
+              accept="image/*"
+              style={{ display: "none" }}
+              onChange={handleImg}
+              disabled={isCurrentUserBlocked || isReceiverBlocked}
+            />
+            {/* <img src="./camera.png" alt="" />
+          <img src="./mic.png" alt="" /> */}
           </div>
-        )}
-        <div ref={endRef}></div>
-      </div>
-      <div className="bottom">
-        <div className="icons">
-          <label
-            htmlFor="file"
+          <input
+            type="text"
+            placeholder={
+              isCurrentUserBlocked || isReceiverBlocked
+                ? "User Blocked"
+                : "Type your message"
+            }
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            onKeyDown={handleKeyPress}
+            disabled={isCurrentUserBlocked || isReceiverBlocked}
+          />
+          <div
+            className="emoji"
             style={
               isCurrentUserBlocked || isReceiverBlocked
                 ? { display: "none" }
@@ -218,59 +273,24 @@ const Chat = () => {
             }
           >
             <img
-              src="./img.png"
+              src="./emoji.png"
               alt=""
-              disabled={isCurrentUserBlocked || isReceiverBlocked}
+              onClick={() => setOpen((prev) => !prev)}
             />
-          </label>
-          <input
-            type="file"
-            id="file"
-            accept="image/*"
-            style={{ display: "none" }}
-            onChange={handleImg}
-            disabled={isCurrentUserBlocked || isReceiverBlocked}
-          />
-          {/* <img src="./camera.png" alt="" />
-          <img src="./mic.png" alt="" /> */}
-        </div>
-        <input
-          type="text"
-          placeholder={
-            isCurrentUserBlocked || isReceiverBlocked
-              ? "User Blocked"
-              : "Type your message"
-          }
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-          onKeyDown={handleKeyPress}
-          disabled={isCurrentUserBlocked || isReceiverBlocked}
-        />
-        <div
-          className="emoji"
-          style={
-            isCurrentUserBlocked || isReceiverBlocked
-              ? { display: "none" }
-              : null
-          }
-        >
-          <img
-            src="./emoji.png"
-            alt=""
-            onClick={() => setOpen((prev) => !prev)}
-          />
-          <div className="picker">
-            <EmojiPicker open={open} onEmojiClick={handleEmoji} />
+            <div className="picker">
+              <EmojiPicker open={open} onEmojiClick={handleEmoji} />
+            </div>
           </div>
+          <img
+            className="sendButton"
+            src="./send.png"
+            alt=""
+            onClick={handleSend}
+          />
         </div>
-        <img
-          className="sendButton"
-          src="./send.png"
-          alt=""
-          onClick={handleSend}
-        />
       </div>
-    </div>
+      {imgSrc && <ImageViewer />}
+    </>
   );
 };
 
