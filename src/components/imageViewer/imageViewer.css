@@ -4,7 +4,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: black;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(19px) saturate(180%);
   border-radius: 12px;
   height: 100%;
   width: 100%;

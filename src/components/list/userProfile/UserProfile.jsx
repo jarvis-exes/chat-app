@@ -6,7 +6,6 @@ import { useChatStore } from "../../../lib/chatStore";
 import {
   collection,
   doc,
-  getDoc,
   getDocs,
   query,
   updateDoc,

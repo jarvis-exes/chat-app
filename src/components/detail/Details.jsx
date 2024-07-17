@@ -10,12 +10,7 @@ import {
   arrayUnion,
   updateDoc,
   doc,
-  onSnapshot,
   deleteDoc,
-  collection,
-  where,
-  query,
-  getDocs,
   getDoc,
 } from "firebase/firestore";
 
