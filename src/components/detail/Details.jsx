@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { auth, db } from "../../lib/firebase";
 import { useChatStore } from "../../lib/chatStore";
 import { useUserStore } from "../../lib/userStore";
+import ImageViewer from "../imageViewer/ImageViewer";
 import {
   arrayRemove,
   arrayUnion,
@@ -111,76 +112,79 @@ const Details = () => {
   };
 
   return (
-    <div className="detail">
-      <div className="backButton">
-        <img src="./back.png" alt="" onClick={changeDetailsOpen} />
-      </div>
-      <div className="user">
-        <img
-          src={user?.avatar || "./avatar.png"}
-          alt=""
-          onClick={() => changeImgViewerState(user?.avatar || "./avatar.png")}
-        />
-        <h2>{user?.fullname}</h2>
-        <p>{user?.username}</p>
-      </div>
-      <div className="bottom-container">
-        <div className="info">
-          <div className="option">
-            <div className="title">
-              <span>Chat Settings</span>
-              <img src="./arrowUp.png" alt="" />
-            </div>
-          </div>
-          <div className="option">
-            <div className="title">
-              <span>Privacy & help</span>
-              <img src="./arrowUp.png" alt="" />
-            </div>
-          </div>
-          <div className="option">
-            <div className="title">
-              <span>Shared photos</span>
-              <img src="./arrowDown.png" alt="" />
-            </div>
-            <div className="photos">
-              <div className="photoItem">
-                <div className="photoDetail">
-                  <img
-                    src="https://images3.alphacoders.com/614/thumbbig-614743.webp"
-                    alt=""
-                  />
-                  <span>photo_abc.png</span>
-                </div>
-                <img src="./download.png" alt="" className="icon" />
-              </div>
-              <div className="photoItem">
-                <div className="photoDetail">
-                  <img
-                    src="https://images3.alphacoders.com/614/thumbbig-614743.webp"
-                    alt=""
-                  />
-                  <span>photo_abc.png</span>
-                </div>
-                <img src="./download.png" alt="" className="icon" />
+    <>
+      <div className="detail">
+        <div className="backButton">
+          <img src="./back.png" alt="" onClick={changeDetailsOpen} />
+        </div>
+        <div className="user">
+          <img
+            src={user?.avatar || "./avatar.png"}
+            alt=""
+            onClick={() => changeImgViewerState(user?.avatar || "./avatar.png")}
+          />
+          <h2>{user?.fullname}</h2>
+          <p>{user?.username}</p>
+        </div>
+        <div className="bottom-container">
+          <div className="info">
+            <div className="option">
+              <div className="title">
+                <span>Chat Settings</span>
+                <img src="./arrowUp.png" alt="" />
               </div>
             </div>
+            <div className="option">
+              <div className="title">
+                <span>Privacy & help</span>
+                <img src="./arrowUp.png" alt="" />
+              </div>
+            </div>
+            <div className="option">
+              <div className="title">
+                <span>Shared photos</span>
+                <img src="./arrowDown.png" alt="" />
+              </div>
+              <div className="photos">
+                <div className="photoItem">
+                  <div className="photoDetail">
+                    <img
+                      src="https://images3.alphacoders.com/614/thumbbig-614743.webp"
+                      alt=""
+                    />
+                    <span>photo_abc.png</span>
+                  </div>
+                  <img src="./download.png" alt="" className="icon" />
+                </div>
+                <div className="photoItem">
+                  <div className="photoDetail">
+                    <img
+                      src="https://images3.alphacoders.com/614/thumbbig-614743.webp"
+                      alt=""
+                    />
+                    <span>photo_abc.png</span>
+                  </div>
+                  <img src="./download.png" alt="" className="icon" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="buttons">
+            <button onClick={handleBlock}>
+              {isCurrentUserBlocked
+                ? "You are Blocked"
+                : isReceiverBlocked
+                ? "Unblock"
+                : "Block"}
+            </button>
+            <button className="deleteButton" onClick={handleDelete}>
+              Delete Chat
+            </button>
           </div>
         </div>
-        <div className="buttons">
-          <button onClick={handleBlock}>
-            {isCurrentUserBlocked
-              ? "You are Blocked"
-              : isReceiverBlocked
-              ? "Unblock"
-              : "Block"}
-          </button>
-          <button className="deleteButton" onClick={handleDelete}>
-            Delete Chat
-          </button>
-        </div>
       </div>
-    </div>
+      {imgSrc && <ImageViewer />}
+    </>
   );
 };
 

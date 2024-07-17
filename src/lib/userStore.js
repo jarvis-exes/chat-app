@@ -7,6 +7,7 @@ export const useUserStore = create((set) => ({
   isLoading: true,
   updatingProfile: false,
   addUser: false,
+  imgSrc: "",
   details: false,
   fetchUserInfo: async (uid) => {
     if (!uid) return set({ currentUser: null, isLoading: false });
@@ -31,5 +32,9 @@ export const useUserStore = create((set) => ({
 
   changeDetailsOpen: () => {
     set((state) => ({ ...state, details: !state.details }));
+  },
+
+  changeImgViewerState: (url) => {
+    set((state) => ({ ...state, imgSrc: url }));
   },
 }));
