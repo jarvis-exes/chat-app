@@ -7,7 +7,7 @@
   left: 50%;
   border-radius: 20px;
   transform: translate(-50%, -50%);
-  background-color: rgba(0, 0, 0, 0.508);
+  background-color: rgba(0, 0, 0, 0.8);
   backdrop-filter: blur(20px) saturate(200%);
   display: flex;
   flex-direction: column;

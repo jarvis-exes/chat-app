@@ -2,11 +2,11 @@
   min-width: 360px;
   max-width: 600px;
   padding: 40px 10px 10px 10px;
-  background-color: rgba(0, 0, 0, 0.648);
+  background-color: rgba(0, 0, 0, 0.8);
   border-radius: 12px;
   position: absolute;
   margin-top: -46px;
-  backdrop-filter: blur(20px) saturate(200%);
+  backdrop-filter: blur(19px) saturate(200%);
   z-index: 2;
   animation: opacityAnimation 0.5s ease-in-out 1;
 

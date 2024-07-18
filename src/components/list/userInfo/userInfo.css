@@ -51,6 +51,7 @@
       position: absolute;
       display: flex;
       flex-direction: column;
+      width: 140px;
       gap: 10px;
       margin-top: 40px;
       padding: 8px;
@@ -61,7 +62,7 @@
       animation: opacityAnimation 0.2s ease-in, slide 0.2s ease-in;
 
       @media only screen and (max-width: 768px) {
-        transform: translateX(-75px);
+        transform: translateX(-105px);
         animation: opacityAnimation 0.2s ease-in, slide-mobile 0.2s ease-in;
       }
 
@@ -94,6 +95,6 @@
     transform: translateX(-55px) translateY(-60px) scale(0);
   }
   to {
-    transform: translateX(-75px) translateY(0px) scale(1);
+    transform: translateX(-105px) translateY(0px) scale(1);
   }
 }
