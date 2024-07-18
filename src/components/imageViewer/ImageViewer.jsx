@@ -19,7 +19,7 @@ const ImageViewer = () => {
         <img src="./plus.png" alt="" onClick={() => changeImgViewerState("")} />
       </div>
 
-      <img ref={elementRef} src={imgSrc} alt="" />
+      {imgSrc && <img ref={elementRef} src={imgSrc} alt="" />}
     </div>
   );
 };

@@ -289,7 +289,7 @@ const Chat = () => {
           />
         </div>
       </div>
-      {imgSrc && <ImageViewer />}
+      {/* {imgSrc && <ImageViewer />} */}
     </>
   );
 };

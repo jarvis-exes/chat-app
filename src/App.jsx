@@ -9,11 +9,12 @@ import { auth, db } from "./lib/firebase";
 import { useUserStore } from "./lib/userStore";
 import { useChatStore } from "./lib/chatStore";
 import { doc } from "firebase/firestore";
+import ImageViewer from "../src/components/imageViewer/ImageViewer";
 
 const App = () => {
   const { currentUser, isLoading, fetchUserInfo, details, changeDetailsOpen } =
     useUserStore();
-  const { chatId } = useChatStore();
+  const { chatId, imgSrc, changeImgViewerState } = useChatStore();
   const [mobileView, setMobileView] = useState(false);
 
   useEffect(() => {
@@ -51,10 +52,12 @@ const App = () => {
         {currentUser ? (
           <div className="container">
             {chatId && details ? <Details /> : chatId ? <Chat /> : <List />}
+            {imgSrc && <ImageViewer />}
           </div>
         ) : (
           <Login />
         )}
+
         <Notification />
       </>
     );
@@ -66,6 +69,7 @@ const App = () => {
             <List />
             {chatId && <Chat />}
             {chatId && <Details />}
+            {imgSrc && <ImageViewer />}
           </div>
         ) : (
           <Login />
