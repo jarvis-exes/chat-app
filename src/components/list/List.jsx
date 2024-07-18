@@ -11,7 +11,6 @@ const List = () => {
     <div className="list">
       <UserInfo />
       <ChatList />
-      {/* {imgSrc && <ImageViewer />} */}
     </div>
   );
 };

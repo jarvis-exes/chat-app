@@ -178,7 +178,6 @@ const Details = () => {
           </div>
         </div>
       </div>
-      {/* {imgSrc && <ImageViewer />} */}
     </>
   );
 };
