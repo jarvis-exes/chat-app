@@ -8,11 +8,12 @@ To start using the app create a user and then sign in the with created user. Fur
 
 ### Features
 1. Create a user with avatar and username.
-2. Search for a user to start chatting.
+2. Search for a user from add users window to start chatting.
 3. Send images to chats.
 4. Send Emojis to chats.
 5. Block a user.
 6. Filter chats.
+7. Delete chats.
 #
 
 ### Screenshots
@@ -21,9 +22,12 @@ To start using the app create a user and then sign in the with created user. Fur
 ![loginPage](https://github.com/jarvis-exes/chat-app/assets/72239404/b77c9eed-a813-46ea-88f7-b1d3e2b80856)
 
 #### Chat UI
-![mainPage](https://github.com/jarvis-exes/chat-app/assets/72239404/959775b9-5080-4259-be96-bd301043b807)
-#
+![chatPage](https://github.com/user-attachments/assets/1368f9f1-9d33-41ed-a7fc-b4bd741b2e70)
 
+#### Mobile UI
+![mobileUi](https://github.com/user-attachments/assets/5f63943e-6a05-4349-9b12-357a01c6b33e)
+
+#
 
 ### How to start working on the project
 1. Clone the repository from main branch
