@@ -31,4 +31,5 @@ To start using the app create a user and then sign in the with created user. Fur
 
 ### How to start working on the project
 1. Clone the repository from main branch
-2. Run the following command in the project directory :  **npm run dev**
+2. Run the following command in the project directory :  **npm install**
+3. Run the following command in the project directory :  **npm run dev**
